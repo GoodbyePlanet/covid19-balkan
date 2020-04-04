@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="./styles/main.css" />
+  </head>
+  <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/1cace46cdd.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../dist/index.js"></script>
+    <canvas class="background"></canvas>
+
+    <script>
+      window.onload = function () {
+        Particles.init({
+          selector: ".background",
+          color: ["red"],
+          sizeVariations: 5,
+          maxParticles: 200,
+        });
+      };
+    </script>
+
+    <div class="header">
+      <h2>COVID19</h2>
+      <h4>Number of infected with Coronavirus in Balkan countries</h4>
+    </div>
+    <div id="chartdiv"></div>
+    <div class="footer">
+      <h6>Total Counts</h6>
+      <div class="counts">
+        <p id="infected">INFECTED: 12389</p>
+        <p id="deaths">DEATHS: 125</p>
+        <p id="recovered">RECOVERED: 1238</p>
+      </div>
+    </div>
+    <div class="author">
+      <span>
+        <a href="https://github.com/GoodbyePlanet" target="_newtab">
+          <i id="icon" class="fab fa-github fa-2x"></i>
+        </a>
+      </span>
+      <span>
+        <a href="https://twitter.com/Nemanjas_Vasic" target="_newtab">
+          <i id="icon" class="fab fa-twitter fa-2x"></i>
+        </a>
+      </span>
+      <span>
+        <a
+          href="https://www.linkedin.com/in/nemanja-vasic-linked/"
+          target="_newtab"
+        >
+          <i id="icon" class="fab fa-linkedin fa-2x"></i>
+        </a>
+      </span>
+      <span>
+        <a href="https://www.facebook.com/nemanjavasa" target="_newtab">
+          <i id="icon" class="fab fa-facebook fa-2x"></i>
+        </a>
+      </span>
+    </div>
+  </body>
+</html>

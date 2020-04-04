@@ -1,0 +1,71 @@
+body {
+  background-color: #272730;
+  color: #fff;
+  font-family: "Courier New", Courier, monospace;
+}
+
+h2,
+h4,
+h6 {
+  margin: 0;
+}
+
+.background {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 600;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.counts {
+  display: flex;
+  font-weight: 600;
+}
+
+.author {
+  width: 99%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  color: #fff;
+}
+
+#chartdiv {
+  width: 100%;
+  height: 700px;
+  padding-top: 50px;
+}
+
+#infected {
+  padding-right: 10px;
+  color: yellow;
+}
+
+#deaths {
+  padding-right: 10px;
+  color: red;
+}
+
+#recovered {
+  padding-right: 10px;
+  color: green;
+}
+
+#icon {
+  padding-right: 15px;
+  color: #ff6666;
+}
