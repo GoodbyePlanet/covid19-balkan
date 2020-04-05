@@ -9,20 +9,6 @@ import balkanCountries from "./balkanCountries";
 
 const covidApi = new NovelCovid();
 
-// const balkanCountries = [
-//   "Montenegro",
-//   "Albania",
-//   "North Macedonia",
-//   "Bulgaria",
-//   "Bosnia and Herzegovina",
-//   "Slovenia",
-//   "Croatia",
-//   "Serbia",
-//   "Greece",
-// ];
-
-console.log("BALKAN COUNTRIES", balkanCountries);
-
 start();
 
 function start() {
@@ -66,7 +52,6 @@ function start() {
 
     chart.zoomOutButton.disabled = true;
 
-    // as by default columns of the same series are of the same color, we add adapter which takes colors from chart.colors color set
     series.columns.template.adapter.add("fill", (fill, target) => {
       return chart.colors.getIndex(target.dataItem.index);
     });
