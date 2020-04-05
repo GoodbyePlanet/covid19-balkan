@@ -1,31 +1,36 @@
+import "@babel/polyfill";
+import { NovelCovid } from "novelcovid";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import am4themes_dark from "@amcharts/amcharts4/themes/dark";
 import am4themes_dataviz from "@amcharts/amcharts4/themes/dataviz";
 
+const covidApi = new NovelCovid();
+
+const balkanCountries = [
+  "Montenegro",
+  "Albania",
+  "North Macedonia",
+  "Bulgaria",
+  "Bosnia and Herzegovina",
+  "Slovenia",
+  "Croatia",
+  "Serbia",
+  "Greece",
+];
+
 start();
 
 function start() {
-  am4core.ready(function () {
+  am4core.ready(async function () {
     am4core.useTheme(am4themes_dark);
     am4core.useTheme(am4themes_dataviz);
     am4core.useTheme(am4themes_animated);
 
     let chart = am4core.create("chartdiv", am4charts.RadarChart);
 
-    chart.data = [
-      { country: "Serbia", active: 1476, dead: 12 },
-      { country: "Bosnia and Herzegovina", active: 604, dead: 45 },
-      { country: "Montenegro", active: 174, dead: 21 },
-      { country: "Croatia", active: 1079, dead: 33 },
-      { country: "Romania", active: 3613, dead: 146 },
-      { country: "North Macedonia", active: 483, dead: 17 },
-      { country: "Slovenia", active: 934, dead: 20 },
-      { country: "Greece", active: 1613, dead: 67 },
-      { country: "Bulgaria", active: 503, dead: 17 },
-      { country: "Albania", active: 333, dead: 18 },
-    ];
+    chart.data = await getData();
 
     chart.innerRadius = am4core.percent(40);
 
@@ -46,9 +51,12 @@ function start() {
 
     let series = chart.series.push(new am4charts.RadarColumnSeries());
     series.dataFields.categoryX = "country";
-    series.dataFields.valueY = "active";
-    series.dataFields.valueZ = "dead";
-    series.tooltipText = "Active: [bold]{valueY}[/]\nDead: [bold]{valueZ}[/]";
+    series.dataFields.valueY = "cases";
+    series.dataFields.valueZ = "deaths";
+    series.dataFields.valueC = "recovered";
+    series.dataFields.valueD = "todayCases";
+    series.tooltipText =
+      "Cases: [bold]{valueY}[/]\nToday Cases: [bold]{valueD}[/]\nDeaths: [bold]{valueZ}[/]\nRecovered: [bold]{valueC}[/]";
     series.columns.template.strokeOpacity = 0;
     series.columns.template.radarColumn.cornerRadius = 5;
     series.columns.template.radarColumn.innerCornerRadius = 0;
@@ -67,4 +75,26 @@ function start() {
     chart.cursor.lineX.disabled = false;
     chart.cursor.lineY.disabled = true;
   });
+}
+
+async function getData() {
+  const countriesCovid = [];
+  const covidData = balkanCountries.map((c) => getCountryData(c));
+
+  for await (const c of covidData) {
+    const { country, cases, todayCases, deaths, recovered } = c;
+    countriesCovid.push({
+      country,
+      cases,
+      todayCases,
+      deaths,
+      recovered,
+    });
+  }
+  console.log("DATA", countriesCovid);
+  return countriesCovid;
+}
+
+async function getCountryData(country) {
+  return covidApi.countries(country);
 }
