@@ -2,6 +2,10 @@
   "version": 2,
   "name": "track",
   "public": true,
-  "builds": [{ "src": "package.json", "use": "@now/static-build" }],
-  "files": ["./dist"]
+  "builds": [
+    { "src": "package.json", "use": "@now/static-build" },
+    { "src": "*.html", "use": "@now/static-build" },
+    { "src": "*.js", "use": "@now/node" }
+  ],
+  "files": ["./src"]
 }

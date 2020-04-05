@@ -2,6 +2,7 @@
   "name": "covid19-balkan",
   "version": "1.0.0",
   "description": "Overview of the infected with Coronavirus in Balkan countries",
+  "repository": "https://github.com/GoodbyePlanet/covid19-balkan.git",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
