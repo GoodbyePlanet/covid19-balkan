@@ -9,6 +9,7 @@ module.exports = {
   devtool: "source-map",
 
   entry: {
+    polyfills: "./src/polyfills.js",
     index: "./src/index.js",
   },
 
