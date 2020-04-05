@@ -5,20 +5,23 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import am4themes_dark from "@amcharts/amcharts4/themes/dark";
 import am4themes_dataviz from "@amcharts/amcharts4/themes/dataviz";
+import balkanCountries from "./balkanCountries";
 
 const covidApi = new NovelCovid();
 
-const balkanCountries = [
-  "Montenegro",
-  "Albania",
-  "North Macedonia",
-  "Bulgaria",
-  "Bosnia and Herzegovina",
-  "Slovenia",
-  "Croatia",
-  "Serbia",
-  "Greece",
-];
+// const balkanCountries = [
+//   "Montenegro",
+//   "Albania",
+//   "North Macedonia",
+//   "Bulgaria",
+//   "Bosnia and Herzegovina",
+//   "Slovenia",
+//   "Croatia",
+//   "Serbia",
+//   "Greece",
+// ];
+
+console.log("BALKAN COUNTRIES", balkanCountries);
 
 start();
 
