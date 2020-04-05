@@ -7,12 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "kill-all": "killall node && webpack-dev-server",
     "start:dev": "webpack-dev-server",
-    "start:dev1": "webpack-dev-server --open --config webpack.dev.js",
     "dev": "webpack -d",
     "prod": "npm run clean && NODE_ENV=production webpack -p",
     "clean": "rimraf ./dist/* ",
     "prepare": "webpack",
-    "build": "webpack --config webpack.prod.js"
+    "now-build": "webpack"
   },
   "keywords": [],
   "author": "Nemanjas",
