@@ -9,7 +9,6 @@ module.exports = {
   devtool: "source-map",
 
   entry: {
-    polyfills: "./src/polyfills.js",
     index: "./src/index.js",
   },
 
@@ -34,7 +33,7 @@ module.exports = {
         test: /\.js$/,
         include: /node_modules/,
         use: {
-          loader: "babel-loader?cacheDirectory",
+          loader: "babel-loader",
           options: {
             presets: ["@babel/preset-env"],
             plugins: ["@babel/plugin-syntax-dynamic-import"],

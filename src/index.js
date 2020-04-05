@@ -1,6 +1,6 @@
 import regeneratorRuntime from "regenerator-runtime";
 import { NovelCovid } from "novelcovid";
-import * as am4core from "@amcharts/amcharts4/core";
+import { ready, useTheme, percent } from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import am4themes_dark from "@amcharts/amcharts4/themes/dark";
@@ -13,16 +13,16 @@ start();
 printTotalCountsOnBalkan();
 
 function start() {
-  am4core.ready(async function () {
-    am4core.useTheme(am4themes_dark);
-    am4core.useTheme(am4themes_dataviz);
-    am4core.useTheme(am4themes_animated);
+  ready(async function () {
+    useTheme(am4themes_dark);
+    useTheme(am4themes_dataviz);
+    useTheme(am4themes_animated);
 
-    let chart = am4core.create("chartdiv", am4charts.RadarChart);
+    let chart = create("chartdiv", am4charts.RadarChart);
 
     chart.data = await getData();
 
-    chart.innerRadius = am4core.percent(40);
+    chart.innerRadius = percent(40);
 
     let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.renderer.grid.template.location = 0;
