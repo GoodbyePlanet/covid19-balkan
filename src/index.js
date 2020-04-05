@@ -10,6 +10,7 @@ import balkanCountries from "./balkanCountries";
 const covidApi = new NovelCovid();
 
 start();
+printTotalCountsOnBalkan();
 
 function start() {
   am4core.ready(async function () {
@@ -67,22 +68,47 @@ function start() {
 
 async function getData() {
   const countriesCovid = [];
-  const covidData = balkanCountries.map((c) => getCountryData(c));
+  try {
+    const covidData = balkanCountries.map((c) => getCountryData(c));
 
-  for await (const c of covidData) {
-    const { country, cases, todayCases, deaths, recovered } = c;
-    countriesCovid.push({
-      country,
-      cases,
-      todayCases,
-      deaths,
-      recovered,
-    });
+    for await (const c of covidData) {
+      const { country, cases, todayCases, deaths, recovered } = c;
+      countriesCovid.push({
+        country,
+        cases,
+        todayCases,
+        deaths,
+        recovered,
+      });
+    }
+
+    return countriesCovid;
+  } catch (error) {
+    console.error("Error has occured ", error);
   }
-  console.log("DATA", countriesCovid);
-  return countriesCovid;
 }
 
 async function getCountryData(country) {
   return covidApi.countries(country);
+}
+
+async function printTotalCountsOnBalkan() {
+  try {
+    let infected = 0;
+    let recovered = 0;
+    let deaths = 0;
+    const covidData = balkanCountries.map((c) => getCountryData(c));
+
+    for await (const c of covidData) {
+      infected += c.cases;
+      recovered += c.recovered;
+      deaths += c.deaths;
+    }
+
+    document.getElementById("infected").innerHTML = "INFECTED: " + infected;
+    document.getElementById("recovered").innerHTML = "RECOVERED: " + recovered;
+    document.getElementById("deaths").innerHTML = "DEATHS: " + deaths;
+  } catch (error) {
+    console.error("Error has occured", error);
+  }
 }
