@@ -31,7 +31,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        include: /node_modules/,
         use: {
           loader: "babel-loader?cacheDirectory",
           options: {
