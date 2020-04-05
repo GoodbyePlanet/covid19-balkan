@@ -1,4 +1,7 @@
-var $path = require("path");
+const $path = require("path");
+
+// const isProd = process.env.NODE_ENV === "production";
+// const outputFilename = isProd ? "[name].[contenthash].js" : "name.[hash].js";
 
 module.exports = {
   mode: "production",
@@ -16,13 +19,21 @@ module.exports = {
     publicPath: "/dist/",
   },
 
+  devServer: {
+    compress: true,
+    port: 3011,
+    hot: true,
+    stats: "errors-only",
+    open: true,
+  },
+
   module: {
     rules: [
       {
         test: /\.js$/,
-        include: /node_modules/,
+        exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: "babel-loader?cacheDirectory",
           options: {
             presets: ["@babel/preset-env"],
             plugins: ["@babel/plugin-syntax-dynamic-import"],
