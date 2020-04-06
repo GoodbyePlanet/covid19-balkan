@@ -12,7 +12,6 @@
     "dev": "webpack -d",
     "prod": "npm run clean && NODE_ENV=production webpack -p",
     "clean": "rimraf ./dist/* ",
-    "prepare": "webpack",
     "now-build": "webpack"
   },
   "keywords": [],
