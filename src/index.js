@@ -20,8 +20,7 @@ function start() {
 
     let chart = create("chartdiv", am4charts.RadarChart);
 
-    chart.data = await getData();
-
+    chart.data = renameCountryNames(await getData());
     chart.innerRadius = percent(40);
 
     let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
@@ -86,6 +85,18 @@ async function getData() {
   } catch (error) {
     console.error("Error has occured ", error);
   }
+}
+
+function renameCountryNames(covidData) {
+  return covidData.map((item) => {
+    if (item.country === "Macedonia") {
+      item.country = "North Macedonia";
+    }
+    if (item.country === "Bosnia") {
+      item.country = "Bosnia and Herzegovina";
+    }
+    return item;
+  });
 }
 
 async function getCountryData(country) {
