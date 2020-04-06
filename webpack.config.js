@@ -8,15 +8,23 @@ module.exports = {
 
   devtool: "source-map",
 
-  entry: {
-    index: "./src/index.js",
-  },
+  // entry: {
+  //   index: "./src/index.js",
+  // },
+
+  entry: ["./src/index.js", "./src/styles/main.css"],
+
+  // output: {
+  //   path: $path.join(__dirname, "dist"),
+  //   filename: "[name].js",
+  //   chunkFilename: "[name].js",
+  //   publicPath: "/dist/",
+  // },
 
   output: {
     path: $path.join(__dirname, "dist"),
-    filename: "[name].js",
-    chunkFilename: "[name].js",
-    publicPath: "/dist/",
+    publicPath: "/",
+    filename: "bundle.js",
   },
 
   devServer: {
@@ -44,6 +52,22 @@ module.exports = {
         test: /.js$/,
         use: ["source-map-loader"],
         enforce: "pre",
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: "style-loader",
+          },
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              importLoaders: 1,
+              sourceMap: true,
+            },
+          },
+        ],
       },
     ],
   },
