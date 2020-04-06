@@ -13,54 +13,89 @@
     <script src="./dist/bundle.js"></script>
     <canvas class="background"></canvas>
 
-    <script>
-      window.onload = function () {
-        Particles.init({
-          selector: ".background",
-          color: ["red"],
-          sizeVariations: 5,
-          maxParticles: 200,
-        });
-      };
-    </script>
-
     <div class="header">
       <h2>COVID19</h2>
       <h4>Number of infected with Coronavirus in Balkan countries</h4>
     </div>
     <div id="chartdiv"></div>
-    <div class="footer">
-      <h6>Total Counts on Balkan</h6>
-      <div class="counts">
-        <p id="infected"></p>
-        <p id="deaths"></p>
-        <p id="recovered"></p>
+
+    <div class="footer-container">
+      <div class="more-info">
+        <button id="open-modal-button">More Information</button>
+      </div>
+
+      <div class="footer">
+        <h6>Total Counts on Balkan</h6>
+        <div class="counts">
+          <p id="infected"></p>
+          <p id="deaths"></p>
+          <p id="recovered"></p>
+        </div>
+      </div>
+      <div class="author">
+        <span>
+          <a href="https://github.com/GoodbyePlanet" target="_newtab">
+            <i id="icon" class="fab fa-github fa-2x"></i>
+          </a>
+        </span>
+        <span>
+          <a href="https://twitter.com/Nemanjas_Vasic" target="_newtab">
+            <i id="icon" class="fab fa-twitter fa-2x"></i>
+          </a>
+        </span>
+        <span>
+          <a
+            href="https://www.linkedin.com/in/nemanja-vasic-linked/"
+            target="_newtab"
+          >
+            <i id="icon" class="fab fa-linkedin fa-2x"></i>
+          </a>
+        </span>
+        <span>
+          <a href="https://www.facebook.com/nemanjavasa" target="_newtab">
+            <i id="icon" class="fab fa-facebook fa-2x"></i>
+          </a>
+        </span>
       </div>
     </div>
-    <div class="author">
-      <span>
-        <a href="https://github.com/GoodbyePlanet" target="_newtab">
-          <i id="icon" class="fab fa-github fa-2x"></i>
-        </a>
-      </span>
-      <span>
-        <a href="https://twitter.com/Nemanjas_Vasic" target="_newtab">
-          <i id="icon" class="fab fa-twitter fa-2x"></i>
-        </a>
-      </span>
-      <span>
-        <a
-          href="https://www.linkedin.com/in/nemanja-vasic-linked/"
-          target="_newtab"
-        >
-          <i id="icon" class="fab fa-linkedin fa-2x"></i>
-        </a>
-      </span>
-      <span>
-        <a href="https://www.facebook.com/nemanjavasa" target="_newtab">
-          <i id="icon" class="fab fa-facebook fa-2x"></i>
-        </a>
-      </span>
+
+    <!-- The Modal -->
+    <div id="modal-id" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>More information</h2>
+        <p>
+          This website was developed by
+          <a href="https://github.com/GoodbyePlanet" target="_newtab">
+            Nemanja Vasic</a
+          >
+          fullstack developer at codecentric Bosnia.
+        </p>
+
+        <p>
+          The purpose of this website is to provide a simple, chart visualized
+          data about the current impact of COVID-19 in the Balkan countries.
+        </p>
+
+        <p>
+          The data are comming from the
+          <a href="https://github.com/NovelCOVID/API" target="_blank"
+            >NovelCOVID API</a
+          >
+          which utilizes reliable sources like
+          <a href="https://www.worldometers.info/coronavirus/" target="_blank"
+            >Worldometer's</a
+          >
+          real time updates about COVID-19 virus.
+        </p>
+
+        <p>
+          If you have any suggestions, questions or feedback, please
+          <a href="mailto:nemanjavasa@gmail.com" target="_blank"
+            >contact me !</a
+          >
+        </p>
+      </div>
     </div>
   </body>
 </html>
