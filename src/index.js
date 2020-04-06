@@ -123,3 +123,34 @@ async function printTotalCountsOnBalkan() {
     console.error("Error has occured", error);
   }
 }
+
+window.onload = function () {
+  // Start Particles
+  Particles.init({
+    selector: ".background",
+    color: ["red"],
+    sizeVariations: 5,
+    maxParticles: 200,
+  });
+
+  const modal = document.getElementById("modal-id");
+
+  document.getElementById("open-modal-button").onclick = function () {
+    modal.style.display = "block";
+  };
+
+  document.getElementsByClassName("close")[0].onclick = function () {
+    modal.style.display = "none";
+  };
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+};
+
+if (module && module.hot) {
+  module.hot.accept();
+}

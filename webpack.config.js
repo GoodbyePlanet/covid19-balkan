@@ -61,11 +61,10 @@ module.exports = {
     ],
   },
   plugins: [
-    !isProd &&
-      new webpack.SourceMapDevToolPlugin({
-        // this is the url of our local sourcemap server
-        publicPath: "http://localhost:3011/",
-        filename: "[file].map",
-      }),
+    new webpack.SourceMapDevToolPlugin({
+      // this is the url of our local sourcemap server
+      publicPath: "http://localhost:3011/",
+      filename: "[file].map",
+    }),
   ],
 };
