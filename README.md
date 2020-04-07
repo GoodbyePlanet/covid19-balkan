@@ -1,0 +1,44 @@
+# COVID19-BALKAN
+The purpose of this project is to provide overview od simple, chart visualized data about the current
+impact of COVID-19 in the Balkan countries.
+
+Web app is created with vanila JavaScript. Web app link: https://covid19-balkan.now.sh/
+
+
+## Installing
+
+1. Download and install [Node.js](https://nodejs.org/en/)
+
+2. Install dependencies
+
+   ```bash
+   npm install
+   ```
+
+3. Start dev environment
+
+   ```bash
+   npm run clean && npm run dev
+   npm run start:dev
+   ```
+ 
+## Create production build
+
+```bash
+npm run prod
+```
+## Deployment
+
+App is deployed using [now.sh](https://zeit.co/home)
+
+## Built with
+
+- [AmCharts](https://github.com/amcharts)
+- [Particles](https://github.com/marcbruederlin/particles.js/)
+- https://github.com/NovelCOVID/API
+
+## Acknowledgments
+
+Thanks guys from `NovelCOVID API` for creating great API. Also special thanks to the guys who created `AmCharts` and `Particles`.
+And thanks to [This](https://covidvisualizer.com/) and [And This](https://covidvisualizer.com/) amazing websites which served as an inspiration 
+for this website.
