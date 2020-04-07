@@ -68,9 +68,7 @@ function start() {
 async function getData() {
   const countriesCovid = [];
   try {
-    const covidData = balkanCountries.map((c) => getCountryData(c));
-
-    for await (const c of covidData) {
+    for (const c of await getCountryData()) {
       const { country, cases, todayCases, deaths, recovered } = c;
       countriesCovid.push({
         country,
@@ -99,8 +97,8 @@ function renameCountryNames(covidData) {
   });
 }
 
-async function getCountryData(country) {
-  return covidApi.countries(country);
+async function getCountryData() {
+  return covidApi.countries(balkanCountries.join(","));
 }
 
 async function printTotalCountsOnBalkan() {
@@ -108,9 +106,8 @@ async function printTotalCountsOnBalkan() {
     let infected = 0;
     let recovered = 0;
     let deaths = 0;
-    const covidData = balkanCountries.map((c) => getCountryData(c));
 
-    for await (const c of covidData) {
+    for (const c of await getCountryData()) {
       infected += c.cases;
       recovered += c.recovered;
       deaths += c.deaths;
