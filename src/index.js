@@ -40,12 +40,42 @@ function start() {
 
     let series = chart.series.push(new am4charts.RadarColumnSeries());
     series.dataFields.categoryX = "country";
+    series.dataFields.valueO = "countryFlag";
     series.dataFields.valueY = "cases";
-    series.dataFields.valueZ = "deaths";
-    series.dataFields.valueC = "recovered";
     series.dataFields.valueD = "todayCases";
-    series.tooltipText =
-      "Cases: [bold]{valueY}[/]\nToday Cases: [bold]{valueD}[/]\nDeaths: [bold]{valueZ}[/]\nRecovered: [bold]{valueC}[/]";
+    series.dataFields.valueC = "recovered";
+    series.dataFields.valueA = "tests";
+    series.dataFields.valueU = "critical";
+    series.dataFields.valueZ = "deaths";
+    series.tooltipHTML = `<img src={valueO} style="width:165px; height:115px;">
+        <hr />
+        <table>
+        <tr>
+          <th align="left">Cases</th>
+          <td style="font-weight:bold">{valueY}</td>
+        </tr>
+        <tr>
+          <th align="left">Today Cases</th>
+          <td style="font-weight:bold">{valueD}</td>
+        </tr>
+        <tr>
+          <th align="left">Recovered</th>
+          <td style="font-weight:bold">{valueC}</td>
+        </tr>
+        <tr>
+          <th align="left">Tested</th>
+          <td style="font-weight:bold">{valueA}</td>
+        </tr>
+        <tr>
+          <th align="left">Critical</th>
+          <td style="font-weight:bold">{valueU}</td>
+        </tr>
+        <tr>
+          <th align="left">Deaths</th>
+          <td style="font-weight:bold">{valueZ}</td>
+        </tr>
+        </table>
+        <hr />`;
     series.columns.template.strokeOpacity = 0;
     series.columns.template.radarColumn.cornerRadius = 5;
     series.columns.template.radarColumn.innerCornerRadius = 0;
@@ -58,6 +88,8 @@ function start() {
 
     categoryAxis.sortBySeries = series;
 
+    categoryAxis.cursorTooltipEnabled = false;
+
     chart.cursor = new am4charts.RadarCursor();
     chart.cursor.behavior = "none";
     chart.cursor.lineX.disabled = false;
@@ -69,13 +101,25 @@ async function getData() {
   const countriesCovid = [];
   try {
     for (const c of await getCountryData()) {
-      const { country, cases, todayCases, deaths, recovered } = c;
-      countriesCovid.push({
+      const {
+        countryInfo,
         country,
         cases,
         todayCases,
         deaths,
         recovered,
+        tests,
+        critical,
+      } = c;
+      countriesCovid.push({
+        countryFlag: countryInfo.flag,
+        country,
+        cases,
+        todayCases,
+        deaths,
+        recovered,
+        tests,
+        critical,
       });
     }
 
