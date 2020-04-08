@@ -1,11 +1,13 @@
 import regeneratorRuntime from "regenerator-runtime";
 import { NovelCovid } from "novelcovid";
+import { CountUp } from "countup.js";
 import { ready, useTheme, percent, create } from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import am4themes_dark from "@amcharts/amcharts4/themes/dark";
 import am4themes_dataviz from "@amcharts/amcharts4/themes/dataviz";
 import balkanCountries from "./balkanCountries";
+import { tooltip } from "./tooltip";
 
 const covidApi = new NovelCovid();
 
@@ -47,35 +49,7 @@ function start() {
     series.dataFields.valueA = "tests";
     series.dataFields.valueU = "critical";
     series.dataFields.valueZ = "deaths";
-    series.tooltipHTML = `<img src={valueO} style="width:165px; height:115px;">
-        <hr />
-        <table>
-        <tr>
-          <th align="left">Cases</th>
-          <td style="font-weight:bold">{valueY}</td>
-        </tr>
-        <tr>
-          <th align="left">Today Cases</th>
-          <td style="font-weight:bold">{valueD}</td>
-        </tr>
-        <tr>
-          <th align="left">Recovered</th>
-          <td style="font-weight:bold">{valueC}</td>
-        </tr>
-        <tr>
-          <th align="left">Tested</th>
-          <td style="font-weight:bold">{valueA}</td>
-        </tr>
-        <tr>
-          <th align="left">Critical</th>
-          <td style="font-weight:bold">{valueU}</td>
-        </tr>
-        <tr>
-          <th align="left">Deaths</th>
-          <td style="font-weight:bold">{valueZ}</td>
-        </tr>
-        </table>
-        <hr />`;
+    series.tooltipHTML = tooltip;
     series.columns.template.strokeOpacity = 0;
     series.columns.template.radarColumn.cornerRadius = 5;
     series.columns.template.radarColumn.innerCornerRadius = 0;
@@ -157,9 +131,18 @@ async function printTotalCountsOnBalkan() {
       deaths += c.deaths;
     }
 
-    document.getElementById("infected").innerHTML = "INFECTED: " + infected;
-    document.getElementById("recovered").innerHTML = "RECOVERED: " + recovered;
-    document.getElementById("deaths").innerHTML = "DEATHS: " + deaths;
+    const infectedCountUp = new CountUp("infected", infected, {
+      prefix: "INFECTED: ",
+    });
+    infectedCountUp.start();
+
+    const deathsCountUp = new CountUp("deaths", deaths, { prefix: "DEATHS: " });
+    deathsCountUp.start();
+
+    const recoveredCountUp = new CountUp("recovered", recovered, {
+      prefix: "RECOVERED: ",
+    });
+    recoveredCountUp.start();
   } catch (error) {
     console.error("Error has occured", error);
   }
@@ -194,7 +177,3 @@ window.onload = async function () {
     }
   };
 };
-
-if (module && module.hot) {
-  module.hot.accept();
-}

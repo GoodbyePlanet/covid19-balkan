@@ -21,6 +21,7 @@
     "@amcharts/amcharts4": "^4.9.12",
     "@types/core-js": "^2.5.3",
     "core-js": "^3.6.4",
+    "countup.js": "^2.0.4",
     "novelcovid": "^1.1.4",
     "regenerator-runtime": "^0.13.5"
   },
