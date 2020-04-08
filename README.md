@@ -1,6 +1,6 @@
 # COVID19-BALKAN
 
-The purpose of this project is to provide overview od simple, chart visualized data about the current
+The purpose of this project is to provide overview of simple, chart visualized data about the current
 impact of COVID-19 in the Balkan countries.
 
 Web app is created with vanila JavaScript. Web app link: https://covid19-balkan.now.sh/
