@@ -16,7 +16,7 @@
   },
   "keywords": [],
   "author": "Nemanjas",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@amcharts/amcharts4": "^4.9.12",
     "@types/core-js": "^2.5.3",

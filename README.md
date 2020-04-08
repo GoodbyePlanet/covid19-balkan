@@ -1,9 +1,11 @@
 # COVID19-BALKAN
+
 The purpose of this project is to provide overview od simple, chart visualized data about the current
 impact of COVID-19 in the Balkan countries.
 
 Web app is created with vanila JavaScript. Web app link: https://covid19-balkan.now.sh/
 
+![Covid19](src/assets/covid19-g.gif)
 
 ## Installing
 
@@ -21,15 +23,22 @@ Web app is created with vanila JavaScript. Web app link: https://covid19-balkan.
    npm run clean && npm run dev
    npm run start:dev
    ```
- 
+
 ## Create production build
 
 ```bash
 npm run prod
 ```
+
 ## Deployment
 
 App is deployed using [now.sh](https://zeit.co/home)
+
+## License & copyright
+
+Sva prava Majci Zemlji
+
+Licensed under the [MIT License](LICENSE.md).
 
 ## Built with
 
@@ -40,5 +49,4 @@ App is deployed using [now.sh](https://zeit.co/home)
 ## Acknowledgments
 
 Thanks guys from `NovelCOVID API` for creating great API. Also special thanks to the guys who created `AmCharts` and `Particles`.
-And thanks to [This](https://covidvisualizer.com/) and [And This](https://covidvisualizer.com/) amazing websites which served as an inspiration 
-for this website.
+And thanks to [This](https://covidvisualizer.com/) amazing websites which served as an inspiration for this website.
