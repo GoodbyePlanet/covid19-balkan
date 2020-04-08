@@ -165,7 +165,7 @@ async function printTotalCountsOnBalkan() {
   }
 }
 
-window.onload = function () {
+window.onload = async function () {
   // Start Particles
   Particles.init({
     selector: ".background",
@@ -183,6 +183,10 @@ window.onload = function () {
   document.getElementsByClassName("close")[0].onclick = function () {
     modal.style.display = "none";
   };
+
+  const data = await getCountryData();
+  document.getElementById("last-updated").innerHTML =
+    "Data last updated " + new Date(data[0].updated);
 
   window.onclick = function (event) {
     if (event.target == modal) {

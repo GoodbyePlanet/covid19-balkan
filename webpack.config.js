@@ -59,7 +59,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(jpe?g|png|gif|ico)$/i,
+        test: /\.(jpe?g|png|gif|ico|svg)$/i,
         loader: "file?name=[name].[ext]",
       },
     ],
