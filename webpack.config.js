@@ -58,6 +58,10 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(jpe?g|png|gif|ico)$/i,
+        loader: "file?name=[name].[ext]",
+      },
     ],
   },
   plugins: [
