@@ -38,7 +38,7 @@ App is deployed using [now.sh](https://zeit.co/home)
 
 Sva prava Majci Zemlji
 
-Licensed under the [MIT License](LICENSE.md).
+Licensed under the [MIT License](LICENSE).
 
 ## Built with
 
