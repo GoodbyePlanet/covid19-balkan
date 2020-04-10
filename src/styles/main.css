@@ -55,6 +55,33 @@ h6 {
   width: 99%;
 }
 
+.container {
+  border: 1px solid green;
+  display: flex;
+}
+
+.logarithmicContainer {
+  display: flex;
+  flex: 1;
+  /* border: 1px solid yellow; */
+}
+
+.radarContainer {
+  display: flex;
+  flex: 1;
+  /* border: 1px solid cyan; */
+}
+
+#logarithmicChart {
+  width: 100%;
+  height: 730px;
+}
+
+#radarChart {
+  width: 100%;
+  height: 730px;
+}
+
 #open-modal-button {
   outline: none;
   font-family: inherit;
@@ -77,11 +104,6 @@ h6 {
   -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
   box-shadow: 5px 40px -10px rgba(0, 0, 0, 0.57);
   transition: all 0.4s ease 0s;
-}
-
-#chartdiv {
-  width: 100%;
-  height: 700px;
 }
 
 #infected {
