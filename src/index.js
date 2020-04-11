@@ -8,6 +8,7 @@ import {
   create,
   color,
   Scrollbar,
+  PatternSet,
 } from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
@@ -39,16 +40,13 @@ function startLogarithmicChart() {
     useTheme(am4themes_dataviz);
     useTheme(am4themes_animated);
 
-    var chart = create("logarithmicChart", am4charts.XYChart);
-
+    let chart = create("logarithmicChart", am4charts.XYChart);
     chart.dateFormatter.dateFormat = "yyyy/MM/dd";
 
     chart.data = await getHistoricalData();
+    chart.colors.step = 2;
 
-    // chart.colors.step = 2;
-
-    // Create axes
-    var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+    let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
     dateAxis.renderer.grid.template.location = 0;
     dateAxis.renderer.minGridDistance = 50;
 
@@ -56,21 +54,30 @@ function startLogarithmicChart() {
     valueAxis.logarithmic = true; // 2
     valueAxis.renderer.minGridDistance = 20; // 3
 
-    function createAxisAndSeries(field, name) {
+    function createSeries(field, name, c) {
       let series = chart.series.push(new am4charts.LineSeries());
+
+      series.zIndex = 1;
+      series.col;
+
       series.dataFields.valueY = field;
       series.dataFields.dateX = "date";
       series.tensionX = 0.8;
-      series.strokeWidth = 3;
+      series.strokeWidth = 2;
       series.yAxis = valueAxis;
       series.name = name;
       series.tooltipText = "{name} Cases: [bold]{valueY}[/]";
-      series.tensionX = 0.8;
       series.showOnInit = true;
 
+      if (field === RS) {
+        series.stroke = color("#396478");
+        series.fill = color("#396478");
+        series.invalidate();
+        chart.feedLegend();
+      }
+
       let bullet = series.bullets.push(new am4charts.CircleBullet());
-      bullet.circle.fill = color("#fff");
-      bullet.circle.strokeWidth = 3;
+      bullet.circle.strokeWidth = 1;
 
       let range = valueAxis.axisRanges.create();
       range.value = 90.4;
@@ -81,11 +88,11 @@ function startLogarithmicChart() {
       range.label.inside = true;
     }
 
-    createAxisAndSeries(RS, RS);
-    createAxisAndSeries(HR, HR);
-    createAxisAndSeries(EL, EL);
-    createAxisAndSeries(SI, SI);
-    createAxisAndSeries(BA, BA);
+    createSeries(RS, RS);
+    createSeries(HR, HR);
+    createSeries(EL, EL);
+    createSeries(SI, SI);
+    createSeries(BA, BA);
 
     chart.legend = new am4charts.Legend();
 
