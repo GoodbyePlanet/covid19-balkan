@@ -76,6 +76,10 @@ function startLogarithmicChart() {
         chart.feedLegend();
       }
 
+      if (field === SI || field === BA) {
+        series.hidden = true;
+      }
+
       let bullet = series.bullets.push(new am4charts.CircleBullet());
       bullet.circle.strokeWidth = 1;
 
