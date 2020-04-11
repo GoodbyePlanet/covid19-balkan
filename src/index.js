@@ -13,10 +13,21 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import am4themes_dark from "@amcharts/amcharts4/themes/dark";
 import am4themes_dataviz from "@amcharts/amcharts4/themes/dataviz";
-import balkanCountries from "./balkanCountries";
+import { balkanCountries, countriesCodes } from "./constants";
 import { tooltip } from "./tooltip";
 
 const covidApi = new NovelCovid();
+
+const {
+  MACEDONIA,
+  BOSNIA,
+  SLOVENIA,
+  CROATIA,
+  SERBIA,
+  GREECE,
+} = balkanCountries;
+
+const { BA, SI, HR, RS, EL } = countriesCodes;
 
 startLogarithmicChart();
 startRadarChart();
@@ -31,12 +42,9 @@ function startLogarithmicChart() {
     var chart = create("logarithmicChart", am4charts.XYChart);
 
     chart.dateFormatter.dateFormat = "yyyy/MM/dd";
-    // Add data
-    // chart.data = getLogarithmicData();
 
     chart.data = await getHistoricalData();
 
-    // chart.data = await getHistoricalDataFoCountry("Serbia");
     // chart.colors.step = 2;
 
     // Create axes
@@ -73,20 +81,18 @@ function startLogarithmicChart() {
       range.label.inside = true;
     }
 
-    createAxisAndSeries("RS", "RS");
-    createAxisAndSeries("HR", "HR");
-    createAxisAndSeries("EL", "EL");
-    createAxisAndSeries("SI", "SI");
-    createAxisAndSeries("BA", "BA");
+    createAxisAndSeries(RS, RS);
+    createAxisAndSeries(HR, HR);
+    createAxisAndSeries(EL, EL);
+    createAxisAndSeries(SI, SI);
+    createAxisAndSeries(BA, BA);
 
     chart.legend = new am4charts.Legend();
 
     // Add cursor
     chart.cursor = new am4charts.XYCursor();
     chart.cursor.fullWidthLineX = true;
-    // chart.cursor.fullWidthLineY = true;
     chart.cursor.xAxis = dateAxis;
-    // chart.cursor.yAxis = valueAxis;
     chart.cursor.lineX.strokeWidth = 0;
     chart.cursor.lineX.fill = color("#000");
     chart.cursor.lineX.fillOpacity = 0.1;
@@ -189,10 +195,10 @@ async function getData() {
 
 function renameCountryNames(covidData) {
   return covidData.map((item) => {
-    if (item.country === "Macedonia") {
+    if (item.country === MACEDONIA) {
       item.country = "North Macedonia";
     }
-    if (item.country === "Bosnia") {
+    if (item.country === BOSNIA) {
       item.country = "Bosnia and Herzegovina";
     }
     return item;
@@ -200,7 +206,7 @@ function renameCountryNames(covidData) {
 }
 
 async function getCountryData() {
-  return covidApi.countries(balkanCountries.join(","));
+  return covidApi.countries(Object.values(balkanCountries).join(","));
 }
 
 async function printTotalCountsOnBalkan() {
@@ -240,21 +246,21 @@ async function getHistoricalData() {
   return Object.keys(groups).map((date) => {
     return {
       date,
-      RS: findByPropertyName(groups, date, "RS").RS,
-      EL: findByPropertyName(groups, date, "EL").EL,
-      HR: findByPropertyName(groups, date, "HR").HR,
-      SI: findByPropertyName(groups, date, "SI").SI,
-      BA: findByPropertyName(groups, date, "BA").BA,
+      RS: findByPropertyName(groups, date, RS).RS,
+      EL: findByPropertyName(groups, date, EL).EL,
+      HR: findByPropertyName(groups, date, HR).HR,
+      SI: findByPropertyName(groups, date, SI).SI,
+      BA: findByPropertyName(groups, date, BA).BA,
     };
   });
 }
 
 function getCountriesHistoricalData() {
-  const serbia = getHistoricalDataForCountry("Serbia", "RS");
-  const greece = getHistoricalDataForCountry("Greece", "EL");
-  const croatia = getHistoricalDataForCountry("Croatia", "HR");
-  const slovenia = getHistoricalDataForCountry("Slovenia", "SI");
-  const bosnia = getHistoricalDataForCountry("Bosnia", "BA");
+  const serbia = getHistoricalDataForCountry(SERBIA, RS);
+  const greece = getHistoricalDataForCountry(GREECE, EL);
+  const croatia = getHistoricalDataForCountry(CROATIA, HR);
+  const slovenia = getHistoricalDataForCountry(SLOVENIA, SI);
+  const bosnia = getHistoricalDataForCountry(BOSNIA, BA);
 
   return Promise.all([serbia, greece, croatia, slovenia, bosnia]);
 }
