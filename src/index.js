@@ -18,10 +18,6 @@ import { tooltip } from "./tooltip";
 
 const covidApi = new NovelCovid();
 
-// getHistoricalDataFoCountry('Serbia');
-
-getHistoricalData();
-
 startLogarithmicChart();
 startRadarChart();
 printTotalCountsOnBalkan();
@@ -60,7 +56,7 @@ function startLogarithmicChart() {
       series.strokeWidth = 3;
       series.yAxis = valueAxis;
       series.name = name;
-      series.tooltipText = "{name}: [bold]{valueY}[/]";
+      series.tooltipText = "{name} Cases: [bold]{valueY}[/]";
       series.tensionX = 0.8;
       series.showOnInit = true;
 
@@ -80,6 +76,8 @@ function startLogarithmicChart() {
     createAxisAndSeries("RS", "RS");
     createAxisAndSeries("HR", "HR");
     createAxisAndSeries("EL", "EL");
+    createAxisAndSeries("SI", "SI");
+    createAxisAndSeries("BA", "BA");
 
     chart.legend = new am4charts.Legend();
 
@@ -235,29 +233,34 @@ async function printTotalCountsOnBalkan() {
 }
 
 async function getHistoricalData() {
-  const historicalSerbia = await getHistoricalDataForCountry(
-    "Serbia",
-    "RS",
-    true
-  );
-  const historicalGreece = await getHistoricalDataForCountry(
-    "Greece",
-    "EL",
-    true
-  );
-  const historicalCroatia = await getHistoricalDataForCountry(
-    "Croatia",
-    "HR",
-    true
-  );
+  const countriesHistory = await getCountriesHistoricalData();
 
-  const allData = [
-    ...historicalSerbia,
-    ...historicalGreece,
-    ...historicalCroatia,
-  ];
+  const groups = groupDataByDate(countriesHistory.flat());
 
-  const groups = allData.reduce((groups, item) => {
+  return Object.keys(groups).map((date) => {
+    return {
+      date,
+      RS: findByPropertyName(groups, date, "RS").RS,
+      EL: findByPropertyName(groups, date, "EL").EL,
+      HR: findByPropertyName(groups, date, "HR").HR,
+      SI: findByPropertyName(groups, date, "SI").SI,
+      BA: findByPropertyName(groups, date, "BA").BA,
+    };
+  });
+}
+
+function getCountriesHistoricalData() {
+  const serbia = getHistoricalDataForCountry("Serbia", "RS");
+  const greece = getHistoricalDataForCountry("Greece", "EL");
+  const croatia = getHistoricalDataForCountry("Croatia", "HR");
+  const slovenia = getHistoricalDataForCountry("Slovenia", "SI");
+  const bosnia = getHistoricalDataForCountry("Bosnia", "BA");
+
+  return Promise.all([serbia, greece, croatia, slovenia, bosnia]);
+}
+
+function groupDataByDate(data) {
+  return data.reduce((groups, item) => {
     const date = item.date;
 
     if (!groups[date]) {
@@ -266,42 +269,19 @@ async function getHistoricalData() {
     groups[date].push(item);
     return groups;
   }, {});
-
-  const groupArrays = Object.keys(groups).map((date) => {
-    return {
-      date,
-      games: groups[date],
-    };
-  });
-
-  const groupArrays1 = Object.keys(groups).map((date) => {
-    return {
-      date,
-      RS: groups[date].find((el) => el.hasOwnProperty("RS")).RS,
-      EL: groups[date].find((el) => el.hasOwnProperty("EL")).EL,
-      HR: groups[date].find((el) => el.hasOwnProperty("HR")).HR,
-    };
-  });
-
-  console.log("FINALL DATA", groups);
-  console.log("FINALL DATA1", groups1);
-  console.log("FINALL ARRAYS DATA", groupArrays);
-  console.log("FINALL ARRAYS1 DATA", groupArrays1);
-
-  return groupArrays1;
 }
 
-async function getHistoricalDataForCountry(country, fieldName, withDate) {
+function findByPropertyName(groups, date, property) {
+  return groups[date].find((el) => el.hasOwnProperty(property));
+}
+
+async function getHistoricalDataForCountry(country, fieldName) {
   const historicalCases = await getHistoricalCasesData(country);
 
-  const historicData = Object.entries(historicalCases).map((item) => {
-    if (withDate) {
-      return { date: item[0], [fieldName]: item[1] };
-    }
-    return { [fieldName]: item[1] };
-  });
-
-  return historicData;
+  return Object.entries(historicalCases).map((item) => ({
+    date: item[0],
+    [fieldName]: item[1],
+  }));
 }
 
 async function getHistoricalCasesData(country) {
