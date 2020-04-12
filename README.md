@@ -43,8 +43,9 @@ Licensed under the [MIT License](LICENSE).
 ## Built with
 
 - [AmCharts](https://github.com/amcharts)
-- [Particles](https://github.com/marcbruederlin/particles.js/)
-- https://github.com/NovelCOVID/API
+- [Particles](https://github.com/VincentGarreau/particles.js/)
+- [CountUp](https://inorganik.github.io/countUp.js/)
+- [NovelCOVID](https://github.com/NovelCOVID/API)
 
 ## Acknowledgments
 

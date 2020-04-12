@@ -48,7 +48,7 @@ async function printTotalCountsOnBalkan() {
 window.onload = async function () {
   particlesJS("particles-js", {
     particles: {
-      number: { value: 150 },
+      number: { value: 120 },
       color: { value: "#B22222" },
       shape: {
         type: "circle",
