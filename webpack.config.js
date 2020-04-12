@@ -21,7 +21,6 @@ module.exports = {
     port: 3011,
     hot: true,
     stats: "errors-only",
-    open: true,
   },
 
   module: {
