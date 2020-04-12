@@ -46,12 +46,44 @@ async function printTotalCountsOnBalkan() {
 }
 
 window.onload = async function () {
-  // Start Particles
-  Particles.init({
-    selector: ".background",
-    color: ["red"],
-    sizeVariations: 5,
-    maxParticles: 200,
+  particlesJS("particles-js", {
+    particles: {
+      number: { value: 150 },
+      color: { value: "#B22222" },
+      shape: {
+        type: "circle",
+        stroke: { width: 1, color: "#ff4d4d" },
+        polygon: { nb_sides: 5 },
+      },
+      opacity: {
+        value: 9,
+        random: true,
+        anim: { enable: true, speed: 2, opacity_min: 0, sync: false },
+      },
+      size: {
+        value: 3,
+        random: true,
+        anim: { enable: false, speed: 4, size_min: 0.3, sync: false },
+      },
+      line_linked: {
+        enable: false,
+        distance: 150,
+        color: "#ffffff",
+        opacity: 0.4,
+        width: 1,
+      },
+      move: {
+        enable: true,
+        speed: 1,
+        direction: "none",
+        random: true,
+        straight: false,
+        out_mode: "out",
+        bounce: false,
+        attract: { enable: false, rotateX: 600, rotateY: 600 },
+      },
+    },
+    retina_detect: true,
   });
 
   const modal = document.getElementById("modal-id");
