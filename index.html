@@ -26,12 +26,15 @@
     <link rel="stylesheet" type="text/css" href="./src/styles/main.css" />
   </head>
   <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.3/particles.min.js"></script>
+    <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script
       src="https://kit.fontawesome.com/1cace46cdd.js"
       crossorigin="anonymous"
     ></script>
     <script src="./dist/bundle.js"></script>
+
+    <!-- particles.js container -->
+    <div id="particles-js"></div>
 
     <div class="header">
       <h2>COVID19-BALKAN</h2>
@@ -49,16 +52,18 @@
     </div>
 
     <div class="footer-container">
-      <div class="more-info">
-        <button id="open-modal-button">More Information</button>
-      </div>
+      <div class="info-footer">
+        <div class="more-info">
+          <button id="open-modal-button">More Information</button>
+        </div>
 
-      <div class="footer">
-        <h6>Total Counts on Balkan</h6>
-        <div class="counts">
-          <p id="infected"></p>
-          <p id="deaths"></p>
-          <p id="recovered"></p>
+        <div class="footer">
+          <h6>Total Counts on Balkan</h6>
+          <div class="counts">
+            <p id="infected"></p>
+            <p id="deaths"></p>
+            <p id="recovered"></p>
+          </div>
         </div>
       </div>
     </div>
@@ -127,6 +132,5 @@
         </div>
       </div>
     </div>
-    <canvas id="canvas" class="background"></canvas>
   </body>
 </html>
