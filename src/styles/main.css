@@ -203,7 +203,6 @@ canvas {
 /* Media Queries */
 @media only screen and (max-width: 1100px) {
   .container {
-    border: 1px solid cyan;
     display: flex;
     flex-direction: column;
   }
