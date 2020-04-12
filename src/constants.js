@@ -10,7 +10,7 @@ const balkanCountries = {
   GREECE: "Greece",
 };
 
-const countriesCodes = {
+const countryCodes = {
   ME: "ME",
   AL: "AL",
   MK: "MK",
@@ -22,4 +22,4 @@ const countriesCodes = {
   EL: "EL",
 };
 
-export { balkanCountries, countriesCodes };
+export { balkanCountries, countryCodes };

@@ -16,7 +16,7 @@ h6 {
   display: block;
   top: 0;
   left: 0;
-  z-index: 0;
+  z-index: -1;
 }
 
 .header {
@@ -51,8 +51,7 @@ h6 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  width: 99%;
+  width: 100%;
 }
 
 .container {
@@ -63,13 +62,11 @@ h6 {
 .logarithmicContainer {
   display: flex;
   flex: 1;
-  /* border: 1px solid yellow; */
 }
 
 .radarContainer {
   display: flex;
   flex: 1;
-  /* border: 1px solid cyan; */
 }
 
 #logarithmicChart {
@@ -182,4 +179,26 @@ h6 {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+/* Media Queries */
+
+@media only screen and (max-width: 1100px) {
+  .container {
+    border: 1px solid cyan;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logarithmicContainer {
+    display: flex;
+    flex: 1;
+    /* border: 1px solid yellow; */
+  }
+
+  .radarContainer {
+    display: flex;
+    flex: 1;
+    /* border: 1px solid cyan; */
+  }
 }

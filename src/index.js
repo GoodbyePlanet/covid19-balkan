@@ -8,8 +8,8 @@ import startLogarithmicChart from "./logarithmicChart";
 
 const covidApi = new NovelCovid();
 
-startLogarithmicChart();
 startRadarChart();
+startLogarithmicChart();
 printTotalCountsOnBalkan();
 
 async function getCountryData() {
