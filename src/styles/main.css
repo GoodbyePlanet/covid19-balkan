@@ -216,4 +216,8 @@ canvas {
     display: flex;
     flex: 1;
   }
+
+  .modal-content {
+    width: 90%;
+  }
 }

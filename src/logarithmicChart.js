@@ -15,7 +15,7 @@ import { balkanCountries, countryCodes } from "./constants";
 
 const covidApi = new NovelCovid();
 const { BOSNIA, SLOVENIA, CROATIA, SERBIA, GREECE } = balkanCountries;
-const { BA, SI, HR, RS, EL } = countryCodes;
+const { BA, SI, HR, RS, GR } = countryCodes;
 
 function startLogarithmicChart() {
   ready(async function () {
@@ -38,7 +38,7 @@ function startLogarithmicChart() {
     valueAxis.logarithmic = true;
     valueAxis.renderer.minGridDistance = 20;
 
-    function createSeries(field, name, c) {
+    function createSeries(field, name) {
       let series = chart.series.push(new am4charts.LineSeries());
 
       series.zIndex = 1;
@@ -76,11 +76,11 @@ function startLogarithmicChart() {
       range.label.inside = true;
     }
 
-    createSeries(RS, RS);
-    createSeries(HR, HR);
-    createSeries(EL, EL);
-    createSeries(SI, SI);
-    createSeries(BA, BA);
+    createSeries(RS, SERBIA);
+    createSeries(HR, CROATIA);
+    createSeries(GR, GREECE);
+    createSeries(SI, SLOVENIA);
+    createSeries(BA, "BIH");
 
     chart.legend = new am4charts.Legend();
 
@@ -104,7 +104,7 @@ async function getHistoricalData() {
     return {
       date,
       RS: findByPropertyName(groups, date, RS).RS,
-      EL: findByPropertyName(groups, date, EL).EL,
+      GR: findByPropertyName(groups, date, GR).GR,
       HR: findByPropertyName(groups, date, HR).HR,
       SI: findByPropertyName(groups, date, SI).SI,
       BA: findByPropertyName(groups, date, BA).BA,
@@ -114,7 +114,7 @@ async function getHistoricalData() {
 
 function getCountriesHistoricalData() {
   const serbia = getHistoricalDataForCountry(SERBIA, RS);
-  const greece = getHistoricalDataForCountry(GREECE, EL);
+  const greece = getHistoricalDataForCountry(GREECE, GR);
   const croatia = getHistoricalDataForCountry(CROATIA, HR);
   const slovenia = getHistoricalDataForCountry(SLOVENIA, SI);
   const bosnia = getHistoricalDataForCountry(BOSNIA, BA);

@@ -72,11 +72,11 @@ function startRadarChart() {
 
 function renameCountryNames(covidData) {
   return covidData.map((item) => {
-    if (item.country === MACEDONIA) {
-      item.country = "North Macedonia";
+    if (item.country === "Macedonia") {
+      item.country = MACEDONIA;
     }
-    if (item.country === BOSNIA) {
-      item.country = "Bosnia and Herzegovina";
+    if (item.country === "Bosnia") {
+      item.country = BOSNIA;
     }
     return item;
   });

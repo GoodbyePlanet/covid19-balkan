@@ -19,7 +19,7 @@ const countryCodes = {
   SI: "SI",
   HR: "HR",
   RS: "RS",
-  EL: "EL",
+  GR: "GR",
 };
 
 export { balkanCountries, countryCodes };
