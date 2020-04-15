@@ -1,17 +1,20 @@
-import regeneratorRuntime from "regenerator-runtime";
-import { NovelCovid } from "novelcovid";
+import regeneratorRuntime from 'regenerator-runtime';
+import { NovelCovid } from 'novelcovid';
 import {
   ready,
   useTheme,
   create,
   color,
   Scrollbar,
-} from "@amcharts/amcharts4/core";
-import * as am4charts from "@amcharts/amcharts4/charts";
-import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import am4themes_dark from "@amcharts/amcharts4/themes/dark";
-import am4themes_dataviz from "@amcharts/amcharts4/themes/dataviz";
-import { balkanCountries, countryCodes } from "./constants";
+  Rectangle,
+  Triangle,
+  InterfaceColorSet,
+} from '@amcharts/amcharts4/core';
+import * as am4charts from '@amcharts/amcharts4/charts';
+import am4themes_animated from '@amcharts/amcharts4/themes/animated';
+import am4themes_dark from '@amcharts/amcharts4/themes/dark';
+import am4themes_dataviz from '@amcharts/amcharts4/themes/dataviz';
+import { balkanCountries, countryCodes } from './constants';
 
 const covidApi = new NovelCovid();
 const { BOSNIA, SLOVENIA, CROATIA, SERBIA, GREECE } = balkanCountries;
@@ -23,8 +26,8 @@ function startLogarithmicChart() {
     useTheme(am4themes_dataviz);
     useTheme(am4themes_animated);
 
-    let chart = create("logarithmicChart", am4charts.XYChart);
-    chart.dateFormatter.dateFormat = "yyyy/MM/dd";
+    let chart = create('logarithmicChart', am4charts.XYChart);
+    chart.dateFormatter.dateFormat = 'yyyy/MM/dd';
     chart.responsive.enabled = true;
 
     chart.data = await getHistoricalData();
@@ -38,24 +41,24 @@ function startLogarithmicChart() {
     valueAxis.logarithmic = true;
     valueAxis.renderer.minGridDistance = 20;
 
-    function createSeries(field, name) {
+    function createSeries(field, name, bullet) {
       let series = chart.series.push(new am4charts.LineSeries());
 
       series.zIndex = 1;
       series.col;
 
       series.dataFields.valueY = field;
-      series.dataFields.dateX = "date";
+      series.dataFields.dateX = 'date';
       series.tensionX = 0.8;
       series.strokeWidth = 2;
       series.yAxis = valueAxis;
       series.name = name;
-      series.tooltipText = "{name} Cases: [bold]{valueY}[/]";
+      series.tooltipText = '{name} Cases: [bold]{valueY}[/]';
       series.showOnInit = true;
 
       if (field === RS) {
-        series.stroke = color("#396478");
-        series.fill = color("#396478");
+        series.stroke = color('#396478');
+        series.fill = color('#396478');
         series.invalidate();
         chart.feedLegend();
       }
@@ -64,23 +67,57 @@ function startLogarithmicChart() {
         series.hidden = true;
       }
 
-      let bullet = series.bullets.push(new am4charts.CircleBullet());
-      bullet.circle.strokeWidth = 1;
+      let interfaceColors = new InterfaceColorSet();
+
+      switch (bullet) {
+        case 'triangle':
+          let triangleBullet = series.bullets.push(new am4charts.Bullet());
+          triangleBullet.width = 12;
+          triangleBullet.height = 12;
+          triangleBullet.horizontalCenter = 'middle';
+          triangleBullet.verticalCenter = 'middle';
+
+          let triangle = triangleBullet.createChild(Triangle);
+          triangle.stroke = interfaceColors.getFor('background');
+          triangle.strokeWidth = 1;
+          triangle.direction = 'top';
+          triangle.width = 12;
+          triangle.height = 12;
+          break;
+        case 'rectangle':
+          let rectangleBullet = series.bullets.push(new am4charts.Bullet());
+          rectangleBullet.width = 10;
+          rectangleBullet.height = 10;
+          rectangleBullet.horizontalCenter = 'middle';
+          rectangleBullet.verticalCenter = 'middle';
+
+          let rectangle = rectangleBullet.createChild(Rectangle);
+          rectangle.stroke = interfaceColors.getFor('background');
+          rectangle.strokeWidth = 1;
+          rectangle.width = 10;
+          rectangle.height = 10;
+          break;
+        default:
+          let circleBullet = series.bullets.push(new am4charts.CircleBullet());
+          circleBullet.circle.stroke = interfaceColors.getFor('background');
+          circleBullet.circle.strokeWidth = 1;
+          break;
+      }
 
       let range = valueAxis.axisRanges.create();
       range.value = 90.4;
-      range.grid.stroke = color("#396478");
+      range.grid.stroke = color('#396478');
       range.grid.strokeWidth = 1;
       range.grid.strokeOpacity = 1;
-      range.grid.strokeDasharray = "3,3";
+      range.grid.strokeDasharray = '3,3';
       range.label.inside = true;
     }
 
-    createSeries(RS, SERBIA);
+    createSeries(RS, SERBIA, 'rectangle');
+    createSeries(GR, GREECE, 'triangle');
     createSeries(HR, CROATIA);
-    createSeries(GR, GREECE);
     createSeries(SI, SLOVENIA);
-    createSeries(BA, "BIH");
+    createSeries(BA, 'BIH');
 
     chart.legend = new am4charts.Legend();
 
@@ -88,7 +125,7 @@ function startLogarithmicChart() {
     chart.cursor.fullWidthLineX = true;
     chart.cursor.xAxis = dateAxis;
     chart.cursor.lineX.strokeWidth = 0;
-    chart.cursor.lineX.fill = color("#000");
+    chart.cursor.lineX.fill = color('#000');
     chart.cursor.lineX.fillOpacity = 0.1;
 
     chart.scrollbarX = new Scrollbar();
