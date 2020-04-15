@@ -28,17 +28,13 @@ async function printTotalCountsOnBalkan() {
       deaths += c.deaths;
     }
 
-    const infectedCountUp = new CountUp("infected", infected, {
-      prefix: "INFECTED: ",
-    });
+    const infectedCountUp = new CountUp("infectedCount", infected);
     infectedCountUp.start();
 
-    const deathsCountUp = new CountUp("deaths", deaths, { prefix: "DEATHS: " });
+    const deathsCountUp = new CountUp("deathsCount", deaths);
     deathsCountUp.start();
 
-    const recoveredCountUp = new CountUp("recovered", recovered, {
-      prefix: "RECOVERED: ",
-    });
+    const recoveredCountUp = new CountUp("recoveredCount", recovered);
     recoveredCountUp.start();
   } catch (error) {
     console.error("Error has occured", error);
