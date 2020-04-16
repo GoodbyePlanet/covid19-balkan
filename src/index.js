@@ -1,10 +1,10 @@
-import regeneratorRuntime from "regenerator-runtime";
-import { NovelCovid } from "novelcovid";
-import { CountUp } from "countup.js";
-import { balkanCountries } from "./constants";
+import regeneratorRuntime from 'regenerator-runtime';
+import { NovelCovid } from 'novelcovid';
+import { CountUp } from 'countup.js';
+import { balkanCountries } from './constants';
 
-import startRadarChart from "./radarChart";
-import startLogarithmicChart from "./logarithmicChart";
+import startRadarChart from './radarChart';
+import startLogarithmicChart from './logarithmicChart';
 
 const covidApi = new NovelCovid();
 
@@ -13,7 +13,7 @@ startLogarithmicChart();
 printTotalCountsOnBalkan();
 
 async function getCountryData() {
-  return covidApi.countries(Object.values(balkanCountries).join(","));
+  return covidApi.countries(Object.values(balkanCountries).join(','));
 }
 
 async function printTotalCountsOnBalkan() {
@@ -28,27 +28,27 @@ async function printTotalCountsOnBalkan() {
       deaths += c.deaths;
     }
 
-    const infectedCountUp = new CountUp("infectedCount", infected);
+    const infectedCountUp = new CountUp('infectedCount', infected);
     infectedCountUp.start();
 
-    const deathsCountUp = new CountUp("deathsCount", deaths);
+    const deathsCountUp = new CountUp('deathsCount', deaths);
     deathsCountUp.start();
 
-    const recoveredCountUp = new CountUp("recoveredCount", recovered);
+    const recoveredCountUp = new CountUp('recoveredCount', recovered);
     recoveredCountUp.start();
   } catch (error) {
-    console.error("Error has occured", error);
+    console.error('Error has occured', error);
   }
 }
 
 window.onload = async function () {
-  particlesJS("particles-js", {
+  particlesJS('particles-js', {
     particles: {
       number: { value: 120 },
-      color: { value: "#B22222" },
+      color: { value: '#B22222' },
       shape: {
-        type: "circle",
-        stroke: { width: 1, color: "#ff4d4d" },
+        type: 'circle',
+        stroke: { width: 1, color: '#ff4d4d' },
         polygon: { nb_sides: 5 },
       },
       opacity: {
@@ -61,20 +61,27 @@ window.onload = async function () {
         random: true,
         anim: { enable: false, speed: 4, size_min: 0.3, sync: false },
       },
+      // line_linked: {
+      //   enable: false,
+      //   distance: 150,
+      //   color: "#ffffff",
+      //   opacity: 0.4,
+      //   width: 1,
+      // },
       line_linked: {
-        enable: false,
-        distance: 150,
-        color: "#ffffff",
-        opacity: 0.4,
-        width: 1,
+        enable: true,
+        distance: 64,
+        color: '#B22222',
+        opacity: 0.2,
+        width: 0,
       },
       move: {
         enable: true,
         speed: 1,
-        direction: "none",
+        direction: 'none',
         random: true,
         straight: false,
-        out_mode: "out",
+        out_mode: 'out',
         bounce: false,
         attract: { enable: false, rotateX: 600, rotateY: 600 },
       },
@@ -82,23 +89,23 @@ window.onload = async function () {
     retina_detect: true,
   });
 
-  const modal = document.getElementById("modal-id");
+  const modal = document.getElementById('modal-id');
 
-  document.getElementById("open-modal-button").onclick = function () {
-    modal.style.display = "block";
+  document.getElementById('open-modal-button').onclick = function () {
+    modal.style.display = 'block';
   };
 
-  document.getElementsByClassName("close")[0].onclick = function () {
-    modal.style.display = "none";
+  document.getElementsByClassName('close')[0].onclick = function () {
+    modal.style.display = 'none';
   };
 
   const data = await getCountryData();
-  document.getElementById("last-updated").innerHTML =
-    "Data last updated " + new Date(data[0].updated);
+  document.getElementById('last-updated').innerHTML =
+    'Data last updated ' + new Date(data[0].updated);
 
   window.onclick = function (event) {
     if (event.target == modal) {
-      modal.style.display = "none";
+      modal.style.display = 'none';
     }
   };
 };
