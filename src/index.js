@@ -5,6 +5,7 @@ import { balkanCountries } from './constants';
 
 import startRadarChart from './radarChart';
 import startLogarithmicChart from './logarithmicChart';
+import particlesConfig from './particlesConfig';
 
 const covidApi = new NovelCovid();
 
@@ -42,52 +43,7 @@ async function printTotalCountsOnBalkan() {
 }
 
 window.onload = async function () {
-  particlesJS('particles-js', {
-    particles: {
-      number: { value: 120 },
-      color: { value: '#B22222' },
-      shape: {
-        type: 'circle',
-        stroke: { width: 1, color: '#ff4d4d' },
-        polygon: { nb_sides: 5 },
-      },
-      opacity: {
-        value: 9,
-        random: true,
-        anim: { enable: true, speed: 2, opacity_min: 0, sync: false },
-      },
-      size: {
-        value: 3,
-        random: true,
-        anim: { enable: false, speed: 4, size_min: 0.3, sync: false },
-      },
-      // line_linked: {
-      //   enable: false,
-      //   distance: 150,
-      //   color: "#ffffff",
-      //   opacity: 0.4,
-      //   width: 1,
-      // },
-      line_linked: {
-        enable: true,
-        distance: 64,
-        color: '#B22222',
-        opacity: 0.2,
-        width: 0,
-      },
-      move: {
-        enable: true,
-        speed: 1,
-        direction: 'none',
-        random: true,
-        straight: false,
-        out_mode: 'out',
-        bounce: false,
-        attract: { enable: false, rotateX: 600, rotateY: 600 },
-      },
-    },
-    retina_detect: true,
-  });
+  particlesJS('particles-js', particlesConfig);
 
   const modal = document.getElementById('modal-id');
 
