@@ -185,9 +185,19 @@ async function getHistoricalDataForCountry(country, fieldName) {
 }
 
 async function getHistoricalCasesData(country) {
-  const historical = await covidApi.historical(null, country);
+  try {
+    const historical = await covidApi.historical(null, country);
+    return historical.timeline.cases; 
+  } catch (error) {
+    console.error('An error has occurred', error);
+    const element = document.getElementById('logarithmicChart');
+    element.parentNode.removeChild(element);
+    const div = document.createElement('div');
+    div.innerHTML = "Logarithmic chart could now load due to error on fetching data from an API";
 
-  return historical.timeline.cases;
+    const container = document.getElementsByClassName("logarithmicContainer");
+    container[0].appendChild(div);
+  }
 }
 
 export default startLogarithmicChart;
