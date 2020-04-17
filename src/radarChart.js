@@ -115,7 +115,18 @@ async function getData() {
 }
 
 async function getCountryData() {
-  return covidApi.countries(Object.values(balkanCountries).join(","));
+  try {
+    return covidApi.countries(Object.values(balkanCountries).join(","));
+  } catch(error) {
+    console.error('An error has occurred', error);
+    const element = document.getElementById('radarChart');
+    element.parentNode.removeChild(element);
+    const div = document.createElement('div');
+    div.innerHTML = "Radar chart could now load due to error on fetching data from an API";
+
+    const container = document.getElementsByClassName("radarContainer");
+    container[0].appendChild(div);
+  }
 }
 
 export default startRadarChart;
