@@ -2,7 +2,7 @@ body {
   background: radial-gradient(#350606, #000);
   margin: 0;
   color: #fff;
-  font-family: "Courier New", Courier, monospace;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 h2,
@@ -85,6 +85,24 @@ canvas {
   justify-content: center;
 }
 
+.secondRowContainer {
+  display: flex;
+}
+
+.coulmnContainer {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.totalsContainer {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
 #particles-js {
   position: fixed;
   width: 100%;
@@ -100,6 +118,11 @@ canvas {
 #radarChart {
   width: 100%;
   height: 730px;
+}
+
+#columnChart {
+  width: 100%;
+  height: 500px;
 }
 
 #open-modal-button {

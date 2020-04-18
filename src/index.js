@@ -6,11 +6,13 @@ import { balkanCountries } from './constants';
 import startRadarChart from './radarChart';
 import startLogarithmicChart from './logarithmicChart';
 import particlesConfig from './particlesConfig';
+import startColumnChart from './columnChart';
 
 const covidApi = new NovelCovid();
 
 startRadarChart();
 startLogarithmicChart();
+startColumnChart();
 printTotalCountsOnBalkan();
 
 async function getCountryData() {
