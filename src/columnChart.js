@@ -3,89 +3,95 @@ import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_dark from '@amcharts/amcharts4/themes/dark';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
-import am4themes_dataviz from '@amcharts/amcharts4/themes/dataviz';
+import { NovelCovid } from 'novelcovid';
+import { balkanCountries } from './constants';
+
+const covidApi = new NovelCovid();
 
 function startColumnChart() {
   am4core.ready(async function () {
     am4core.useTheme(am4themes_dark);
-    am4core.useTheme(am4themes_dataviz);
     am4core.useTheme(am4themes_animated);
+
     let chart = am4core.create('columnChart', am4charts.XYChart3D);
+    chart.colors.list = [am4core.color('#8C2B2C'), am4core.color('#28314E')];
+    chart.data = renameCountryNames(await getData()).reverse();
 
-    chart.data = [
-      {
-        country: 'Serbia',
-        recovered: 534,
-        deaths: 110,
-      },
-      {
-        country: 'Greece',
-        recovered: 269,
-        deaths: 108,
-      },
-      {
-        country: 'Croatia',
-        recovered: 600,
-        deaths: 36,
-      },
-      {
-        country: 'Slovenia',
-        recovered: 174,
-        deaths: 66,
-      },
-      {
-        country: 'BiH',
-        recovered: 320,
-        deaths: 46,
-      },
-      {
-        country: 'North Macedonia',
-        recovered: 139,
-        deaths: 49,
-      },
-      {
-        country: 'Bulgaria',
-        recovered: 153,
-        deaths: 41,
-      },
-      {
-        country: 'Albania',
-        recovered: 283,
-        deaths: 26,
-      },
-      {
-        country: 'Montenegro',
-        recovered: 55,
-        deaths: 5,
-      },
-    ];
+    chart.paddingTop = 40;
 
-    var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+    let title = chart.titles.create();
+    title.text = 'Recovered and deaths comparison';
+    title.fontSize = 16;
+    title.marginBottom = 30;
+
+    let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = 'country';
     categoryAxis.renderer.grid.template.location = 0;
     categoryAxis.renderer.minGridDistance = 30;
+    categoryAxis.renderer.labels.template.fontSize = 10;
 
-    var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.title.text = 'GDP growth rate';
-    valueAxis.renderer.labels.template.adapter.add('text', function (text) {
-      return text;
-    });
+    chart.yAxes.push(new am4charts.ValueAxis());
 
-    // Create series
-    var series = chart.series.push(new am4charts.ColumnSeries3D());
-    series.dataFields.valueY = 'deaths';
-    series.dataFields.categoryX = 'country';
-    series.name = 'Deaths';
-    series.clustered = false;
-    series.columns.template.tooltipText = 'Deaths: [bold]{valueY}[/]';
-    series.columns.template.fillOpacity = 0.9;
+    function createSeries(field) {
+      let series = chart.series.push(new am4charts.ColumnSeries3D());
+      series.dataFields.valueY = field;
+      series.dataFields.categoryX = 'country';
+      series.name = field;
+      series.clustered = false;
+      series.columns.template.tooltipText =
+        '{country} {name}: [bold]{valueY}[/]';
+      series.columns.template.fillOpacity = 0.6;
+      series.tooltip.pointerOrientation = 'vertical';
+    }
 
-    var series2 = chart.series.push(new am4charts.ColumnSeries3D());
-    series2.dataFields.valueY = 'recovered';
-    series2.dataFields.categoryX = 'country';
-    series2.name = 'Recovered';
-    series2.clustered = false;
-    series2.columns.template.tooltipText = 'Recovered: [bold]{valueY}[/]';
+    createSeries('deaths');
+    createSeries('recovered');
+  });
+}
+
+async function getData() {
+  const countriesCovid = [];
+  try {
+    for (const c of await getCountryData()) {
+      const { country, deaths, recovered } = c;
+      countriesCovid.push({
+        country,
+        deaths,
+        recovered,
+      });
+    }
+
+    return countriesCovid;
+  } catch (error) {
+    console.error('Error has occured ', error);
+  }
+}
+
+async function getCountryData() {
+  try {
+    return covidApi.countries(Object.values(balkanCountries).join(','));
+  } catch (error) {
+    console.error('An error has occurred', error);
+    const element = document.getElementById('radarChart');
+    element.parentNode.removeChild(element);
+    const div = document.createElement('div');
+    div.innerHTML =
+      'Radar chart could now load due to error on fetching data from an API';
+
+    const container = document.getElementsByClassName('radarContainer');
+    container[0].appendChild(div);
+  }
+}
+
+function renameCountryNames(covidData) {
+  return covidData.map((item) => {
+    if (item.country === 'Macedonia') {
+      item.country = 'N. Macedonia';
+    }
+    if (item.country === 'Bosnia') {
+      item.country = 'BiH';
+    }
+    return item;
   });
 }
 

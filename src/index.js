@@ -12,8 +12,8 @@ const covidApi = new NovelCovid();
 
 startRadarChart();
 startLogarithmicChart();
-startColumnChart();
 printTotalCountsOnBalkan();
+startColumnChart();
 
 async function getCountryData() {
   return covidApi.countries(Object.values(balkanCountries).join(','));
