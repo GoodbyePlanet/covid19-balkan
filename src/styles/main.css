@@ -31,17 +31,6 @@ canvas {
   font-weight: 600;
 }
 
-.footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.counts {
-  display: flex;
-  font-weight: 600;
-}
-
 .author {
   display: flex;
   justify-content: center;
@@ -96,13 +85,6 @@ canvas {
   justify-content: center;
 }
 
-.totalsContainer {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-}
-
 #particles-js {
   position: fixed;
   width: 100%;
@@ -147,36 +129,6 @@ canvas {
   -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
   box-shadow: 5px 40px -10px rgba(0, 0, 0, 0.57);
   transition: all 0.4s ease 0s;
-}
-
-#infected {
-  padding-right: 10px;
-  color: yellow;
-}
-
-#infectedCount {
-  color: yellow;
-  padding-top: 1px;
-}
-
-#deaths {
-  padding-right: 10px;
-  color: red;
-}
-
-#deathsCount {
-  color: red;
-  padding-top: 1px;
-}
-
-#recovered {
-  padding-right: 10px;
-  color: green;
-}
-
-#recoveredCount {
-  color: green;
-  padding-top: 1px;
 }
 
 #icon {
@@ -240,11 +192,6 @@ canvas {
   color: black;
   text-decoration: none;
   cursor: pointer;
-}
-
-.total-number {
-  display: flex;
-  padding-right: 10px;
 }
 
 /* Media Queries */

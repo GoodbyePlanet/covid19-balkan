@@ -1,0 +1,127 @@
+.totalsContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.circlesContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 1px solid yellow; */
+  flex: 3;
+  width: 99%;
+}
+
+.totalsTitle {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.circles {
+  display: flex;
+  flex: 3;
+  width: 100%;
+  /* border: 1px solid black; */
+}
+
+.infectedCircle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  /* border: 1px solid blue; */
+}
+
+.deathsCircle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  /* border: 1px solid orange; */
+}
+
+.recoveredCircle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  /* border: 1px solid azure; */
+}
+
+.circlesAnimation {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  opacity: 0;
+  animation: scaleIn 4s infinite cubic-bezier(0, 0.97, 0.89, 0.32);
+}
+
+.circlesAnimation.infected {
+  background-color: #42538C;
+}
+
+.circlesAnimation.deaths {
+  background-color: #8c2b2c;
+}
+
+.circlesAnimation.recovered {
+  background-color: #065301;
+}
+
+.infectedIconText {
+  font-weight: 600;
+  color: #1e90ff;
+}
+
+.deathsIconText {
+  font-weight: 600;
+  color: #d60a0a;
+}
+
+.recoveredIconText {
+  font-weight: 600;
+  color: #19a719;
+}
+
+.infoLinksContainer {
+  display: flex;
+  flex: 1;
+  /* border: 1px solid cyan; */
+  width: 99%;
+}
+
+.counters {
+  display: flex;
+  align-items: center;
+}
+
+#infectedCount {
+  color: #1e90ff;
+  font-weight: 600;
+}
+
+#deathsCount {
+  color: #d60a0a;
+  font-weight: 600;
+}
+
+#recoveredCount {
+  color: #19a719;
+  font-weight: 600;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.5, 0.5);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(2.5, 2.5);
+    opacity: 0;
+  }
+}

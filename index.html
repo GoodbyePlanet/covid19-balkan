@@ -29,6 +29,7 @@
     />
     <link rel="icon" href="./src/assets/coronavirus.png" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="./src/styles/main.css" />
+    <link rel="stylesheet" type="text/css" href="./src/styles/totals.css" />
   </head>
   <body>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -61,7 +62,47 @@
         <div id="columnChart"></div>
       </div>
       <div class="totalsContainer">
-        <div id="totalNum">Here goes circles for totals</div>
+        <div class="circlesContainer">
+         
+          <div class="totalsTitle">Total Counts on Balkan</div>
+          
+          <div class="circles">
+            <div class="infectedCircle">
+              <div class="counters">
+                <div class="infectedIconText"><i class="fas fa-virus"></i> INFECTED: </div>
+                <div id="infectedCount"></div>
+              </div>
+              <div class="circlesAnimation infected" style="animation-delay: -3s"></div>
+              <div class="circlesAnimation infected" style="animation-delay: -2s"></div>
+              <div class="circlesAnimation infected" style="animation-delay: -1s"></div>
+              <div class="circlesAnimation infected" style="animation-delay: 0s"></div>
+
+            </div>
+            <div class="deathsCircle">
+              <div class="counters">
+                <div class="deathsIconText"><i class="fas fa-skull-crossbones"></i> DEATHS: </div>
+                <div id="deathsCount"></div>
+              </div>
+              <div class="circlesAnimation deaths" style="animation-delay: -3s"></div>
+              <div class="circlesAnimation deaths" style="animation-delay: -2s"></div>
+              <div class="circlesAnimation deaths" style="animation-delay: -1s"></div>
+              <div class="circlesAnimation deaths" style="animation-delay: 0s"></div>
+            </div>
+            <div class="recoveredCircle">
+              <div class="counters">
+                <div class="recoveredIconText"><i class="fas fa-heartbeat"></i> RECOVERED: </div>
+                <div id="recoveredCount"></div>
+              </div>
+              <div class="circlesAnimation recovered" style="animation-delay: -3s"></div>
+              <div class="circlesAnimation recovered" style="animation-delay: -2s"></div>
+              <div class="circlesAnimation recovered" style="animation-delay: -1s"></div>
+              <div class="circlesAnimation recovered" style="animation-delay: 0s"></div>
+            </div>
+          </div>
+        </div>
+        <div class="infoLinksContainer">
+          <div>Here goes info links...</div>
+        </div>
       </div>
     </div>
 
@@ -71,7 +112,7 @@
           <button id="open-modal-button">More Information</button>
         </div>
 
-        <div class="footer">
+        <!-- <div class="footer">
           <h6>Total Counts on Balkan</h6>
           <div class="counts">
             <div class="total-number">
@@ -87,7 +128,7 @@
               <p id="recoveredCount"></p>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
