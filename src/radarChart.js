@@ -24,6 +24,11 @@ function startRadarChart() {
     chart.data = renameCountryNames(await getData());
     chart.innerRadius = percent(40);
 
+    let title = chart.titles.create();
+    title.text = 'Radar chart';
+    title.fontSize = 16;
+    title.marginBottom = 20;
+
     let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.renderer.grid.template.location = 0;
     categoryAxis.dataFields.category = "country";
