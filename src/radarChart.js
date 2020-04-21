@@ -1,6 +1,6 @@
 import regeneratorRuntime from "regenerator-runtime";
 import { NovelCovid } from "novelcovid";
-import { ready, useTheme, percent, create } from "@amcharts/amcharts4/core";
+import { ready, useTheme, percent, create, color } from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import am4themes_dark from "@amcharts/amcharts4/themes/dark";
@@ -28,6 +28,8 @@ function startRadarChart() {
     title.text = 'Radar chart';
     title.fontSize = 16;
     title.marginBottom = 20;
+    title.fill = color('#ef6666');
+    title.fontWeight = 600;
 
     let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.renderer.grid.template.location = 0;

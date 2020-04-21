@@ -12,6 +12,7 @@ function startColumnChart() {
   am4core.ready(async function () {
     am4core.useTheme(am4themes_dark);
     am4core.useTheme(am4themes_animated);
+    am4core.options.autoSetClassName = true;
 
     let chart = am4core.create('columnChart', am4charts.XYChart3D);
     chart.colors.list = [am4core.color('#8C2B2C'), am4core.color('#28314E')];
@@ -23,6 +24,8 @@ function startColumnChart() {
     title.text = 'Recovered and deaths comparison';
     title.fontSize = 16;
     title.marginBottom = 30;
+    title.fill = am4core.color('#ef6666');
+    title.fontWeight = 600;
 
     let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
     categoryAxis.dataFields.category = 'country';

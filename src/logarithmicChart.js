@@ -37,6 +37,8 @@ function startLogarithmicChart() {
     title.text = 'Logarithmic chart - last 30 days data - number of new confirmed cases';
     title.fontSize = 16;
     title.marginBottom = 20;
+    title.fill = color('#ef6666');
+    title.fontWeight = 600;
 
     let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
     dateAxis.renderer.grid.template.location = 0;

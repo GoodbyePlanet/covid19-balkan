@@ -10,7 +10,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* border: 1px solid yellow; */
   flex: 3;
   width: 99%;
 }
@@ -20,13 +19,14 @@
   flex: 1;
   align-items: center;
   padding-top: 15px;
+  color: #ef6666;
+  font-weight: 600;
 }
 
 .circles {
   display: flex;
   flex: 3;
   width: 100%;
-  /* border: 1px solid black; */
 }
 
 .infectedCircle {
@@ -34,7 +34,6 @@
   justify-content: center;
   align-items: center;
   flex: 1;
-  /* border: 1px solid blue; */
 }
 
 .deathsCircle {
@@ -42,7 +41,6 @@
   justify-content: center;
   align-items: center;
   flex: 1;
-  /* border: 1px solid orange; */
 }
 
 .recoveredCircle {
@@ -50,7 +48,6 @@
   justify-content: center;
   align-items: center;
   flex: 1;
-  /* border: 1px solid azure; */
 }
 
 .circlesAnimation {
@@ -87,15 +84,6 @@
 .recoveredIconText {
   font-weight: 600;
   color: #19a719;
-}
-
-.infoLinksContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex: 2;
-  border: 1px solid cyan;
-  width: 99%;
 }
 
 .counters {
