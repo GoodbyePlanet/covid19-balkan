@@ -19,6 +19,7 @@
   display: flex;
   flex: 1;
   align-items: center;
+  padding-top: 15px;
 }
 
 .circles {
@@ -90,8 +91,10 @@
 
 .infoLinksContainer {
   display: flex;
-  flex: 1;
-  /* border: 1px solid cyan; */
+  flex-direction: column;
+  align-items: center;
+  flex: 2;
+  border: 1px solid cyan;
   width: 99%;
 }
 
