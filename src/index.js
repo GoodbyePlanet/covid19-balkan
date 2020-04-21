@@ -10,8 +10,8 @@ import startColumnChart from './columnChart';
 
 const covidApi = new NovelCovid();
 
-// startRadarChart();
-// startLogarithmicChart();
+startRadarChart();
+startLogarithmicChart();
 printTotalCountsOnBalkan();
 startColumnChart();
 
