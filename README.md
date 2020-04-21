@@ -50,4 +50,4 @@ Licensed under the [MIT License](LICENSE).
 ## Acknowledgments
 
 Thanks guys from `NovelCOVID API` for creating great API. Also special thanks to the guys who created `AmCharts` and `Particles`.
-And thanks to [This](https://covidvisualizer.com/) amazing websites which served as an inspiration for this website.
+And thanks to [this](https://covidvisualizer.com/) amazing websites which served as an inspiration for this website.
