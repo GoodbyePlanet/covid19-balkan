@@ -214,4 +214,9 @@ canvas {
   .modal-content {
     width: 90%;
   }
+
+  .secondRowContainer {
+    display: flex;
+    flex-direction: column;
+  } 
 }

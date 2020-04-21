@@ -77,7 +77,7 @@ window.onload = async function () {
   };
 
   swapText.prototype.swap = function () {
-    var nextIndex = this.index + 1;
+    let nextIndex = this.index + 1;
     if (this.index == this.items.length - 1) {
       this.index = 0;
       this.setCurrent(0, this.items.length - 1);
