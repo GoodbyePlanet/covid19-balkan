@@ -79,7 +79,7 @@ async function getCountryData() {
     element.parentNode.removeChild(element);
     const div = document.createElement('div');
     div.innerHTML =
-      'Radar chart could now load due to error on fetching data from an API';
+      'Column chart could now load due to error on fetching data from an API';
 
     const container = document.getElementsByClassName('coulmnContainer');
     container[0].appendChild(div);
