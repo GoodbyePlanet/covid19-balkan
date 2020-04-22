@@ -22,7 +22,6 @@ const { BA, SI, HR, RS, GR } = countryCodes;
 
 
 function startLogarithmicChart() {
-
   ready(async function () {
     useTheme(am4themes_dark);
     useTheme(am4themes_dataviz);
