@@ -45,7 +45,7 @@ async function printTotalCountsOnBalkan() {
 }
 
 window.onload = async function () {
-  function swapText(args) {
+  function swapInfoLinks(args) {
     (this.items = document.querySelectorAll(args.selector)),
       (this.duration = args.duration),
       (this.tick = 0),
@@ -55,7 +55,7 @@ window.onload = async function () {
 
     this.main();
   }
-  swapText.prototype.main = function () {
+  swapInfoLinks.prototype.main = function () {
     requestAnimationFrame(this.main.bind(this));
     if (this.tick >= this.duration) {
       this.tick = 0;
@@ -66,17 +66,17 @@ window.onload = async function () {
     }
   };
 
-  swapText.prototype.render = function () {
+  swapInfoLinks.prototype.render = function () {
     this.current.classList.remove('hidden');
     this.last.classList.add('hidden');
   };
 
-  swapText.prototype.setCurrent = function (index, lastIndex) {
+  swapInfoLinks.prototype.setCurrent = function (index, lastIndex) {
     this.current = this.items[index];
     this.last = this.items[lastIndex];
   };
 
-  swapText.prototype.swap = function () {
+  swapInfoLinks.prototype.swap = function () {
     let nextIndex = this.index + 1;
     if (this.index == this.items.length - 1) {
       this.index = 0;
@@ -87,7 +87,7 @@ window.onload = async function () {
     }
   };
 
-  new swapText({
+  new swapInfoLinks({
     duration: 500,
     selector: '.text',
   });
