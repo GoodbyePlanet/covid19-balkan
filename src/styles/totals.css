@@ -60,7 +60,7 @@
 }
 
 .circlesAnimation.infected {
-  background-color: #42538C;
+  background-color: #065301;
 }
 
 .circlesAnimation.deaths {
@@ -68,12 +68,12 @@
 }
 
 .circlesAnimation.recovered {
-  background-color: #065301;
+  background-color: #42538C;
 }
 
 .infectedIconText {
   font-weight: 600;
-  color: #1e90ff;
+  color: #19a719;
 }
 
 .deathsIconText {
@@ -83,7 +83,7 @@
 
 .recoveredIconText {
   font-weight: 600;
-  color: #19a719;
+  color: #1e90ff;
 }
 
 .counters {
@@ -92,7 +92,7 @@
 }
 
 #infectedCount {
-  color: #1e90ff;
+  color: #19a719;
   font-weight: 600;
 }
 
@@ -102,7 +102,7 @@
 }
 
 #recoveredCount {
-  color: #19a719;
+  color: #1e90ff;
   font-weight: 600;
 }
 
