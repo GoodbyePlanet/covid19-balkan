@@ -20,7 +20,9 @@ const covidApi = new NovelCovid();
 const { BOSNIA, SLOVENIA, CROATIA, SERBIA, GREECE } = balkanCountries;
 const { BA, SI, HR, RS, GR } = countryCodes;
 
+
 function startLogarithmicChart() {
+
   ready(async function () {
     useTheme(am4themes_dark);
     useTheme(am4themes_dataviz);
@@ -32,6 +34,10 @@ function startLogarithmicChart() {
 
     chart.data = await getHistoricalData();
     chart.colors.step = 2;
+
+    chart.preloader.fill = '#FFFFFF';
+    chart.preloader.opacity = 0.6;
+    chart.preloader.visible = true;
 
     let title = chart.titles.create();
     title.text = 'Logarithmic chart - last 30 days data - number of new confirmed cases';
