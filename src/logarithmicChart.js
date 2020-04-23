@@ -20,18 +20,21 @@ const covidApi = new NovelCovid();
 const { BOSNIA, SLOVENIA, CROATIA, SERBIA, GREECE } = balkanCountries;
 const { BA, SI, HR, RS, GR } = countryCodes;
 
-
-function startLogarithmicChart() {
+function startLogarithmicChart(dataType) {
   ready(async function () {
     useTheme(am4themes_dark);
     useTheme(am4themes_dataviz);
     useTheme(am4themes_animated);
 
-    let chart = create('logarithmicChart', am4charts.XYChart);
+    const chartType = 'logarithmicChart' + dataType;
+
+    console.log('CHART TYPE', chartType);
+
+    let chart = create(chartType, am4charts.XYChart);
     chart.dateFormatter.dateFormat = 'yyyy/MM/dd';
     chart.responsive.enabled = true;
 
-    chart.data = await getHistoricalData();
+    chart.data = await getHistoricalData(dataType);
     chart.colors.step = 2;
 
     chart.preloader.fill = '#FFFFFF';
@@ -39,7 +42,8 @@ function startLogarithmicChart() {
     chart.preloader.visible = true;
 
     let title = chart.titles.create();
-    title.text = 'Logarithmic chart - last 30 days data - number of new confirmed cases';
+    title.text =
+      `Logarithmic chart - last 30 days data - confirmed ${dataType} per day`;
     title.fontSize = 16;
     title.marginBottom = 20;
     title.fill = color('#ef6666');
@@ -65,7 +69,7 @@ function startLogarithmicChart() {
       series.strokeWidth = 2;
       series.yAxis = valueAxis;
       series.name = name;
-      series.tooltipText = '{name} Cases: [bold]{valueY}[/]';
+      series.tooltipText = `{name} ${dataType}: [bold]{valueY}[/]`;
       series.showOnInit = true;
 
       if (field === RS) {
@@ -144,8 +148,8 @@ function startLogarithmicChart() {
   });
 }
 
-async function getHistoricalData() {
-  const countriesHistory = await getCountriesHistoricalData();
+async function getHistoricalData(dataType) {
+  const countriesHistory = await getCountriesHistoricalData(dataType);
 
   const groups = groupDataByDate(countriesHistory.flat());
 
@@ -161,12 +165,12 @@ async function getHistoricalData() {
   });
 }
 
-function getCountriesHistoricalData() {
-  const serbia = getHistoricalDataForCountry(SERBIA, RS);
-  const greece = getHistoricalDataForCountry(GREECE, GR);
-  const croatia = getHistoricalDataForCountry(CROATIA, HR);
-  const slovenia = getHistoricalDataForCountry(SLOVENIA, SI);
-  const bosnia = getHistoricalDataForCountry(BOSNIA, BA);
+function getCountriesHistoricalData(dataType) {
+  const serbia = getHistoricalDataForCountry(dataType, SERBIA, RS);
+  const greece = getHistoricalDataForCountry(dataType, GREECE, GR);
+  const croatia = getHistoricalDataForCountry(dataType, CROATIA, HR);
+  const slovenia = getHistoricalDataForCountry(dataType, SLOVENIA, SI);
+  const bosnia = getHistoricalDataForCountry(dataType, BOSNIA, BA);
 
   return Promise.all([serbia, greece, croatia, slovenia, bosnia]);
 }
@@ -187,8 +191,8 @@ function findByPropertyName(groups, date, property) {
   return groups[date].find((el) => el.hasOwnProperty(property));
 }
 
-async function getHistoricalDataForCountry(country, fieldName) {
-  const historicalCases = await getHistoricalCasesData(country);
+async function getHistoricalDataForCountry(dataType, country, fieldName) {
+  const historicalCases = await getHistoricalCasesData(dataType, country);
 
   return Object.entries(historicalCases).map((item) => ({
     date: item[0],
@@ -196,18 +200,24 @@ async function getHistoricalDataForCountry(country, fieldName) {
   }));
 }
 
-async function getHistoricalCasesData(country) {
+async function getHistoricalCasesData(dataType, country) {
   try {
     const historical = await covidApi.historical(null, country);
-    return historical.timeline.cases; 
+
+    if (dataType === 'deaths') {
+      return historical.timeline.deaths;
+    }
+
+    return historical.timeline.cases;
   } catch (error) {
     console.error('An error has occurred', error);
     const element = document.getElementById('logarithmicChart');
     element.parentNode.removeChild(element);
     const div = document.createElement('div');
-    div.innerHTML = "Logarithmic chart could now load due to error on fetching data from an API";
+    div.innerHTML =
+      'Logarithmic chart could now load due to error on fetching data from an API';
 
-    const container = document.getElementsByClassName("logarithmicContainer");
+    const container = document.getElementsByClassName('logarithmicContainer');
     container[0].appendChild(div);
   }
 }

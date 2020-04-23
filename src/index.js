@@ -11,7 +11,8 @@ import startColumnChart from './columnChart';
 const covidApi = new NovelCovid();
 
 startRadarChart();
-startLogarithmicChart();
+startLogarithmicChart('cases');
+startLogarithmicChart('deaths');
 printTotalCountsOnBalkan();
 startColumnChart();
 
