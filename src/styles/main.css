@@ -74,7 +74,11 @@ canvas {
   justify-content: center;
 }
 
-.secondRowContainer {
+.deathsContainer {
+  display: flex;
+}
+
+.columnChartAndTotalsContainer {
   display: flex;
 }
 
@@ -92,7 +96,12 @@ canvas {
   background-repeat: no-repeat;
 }
 
-#logarithmicChart {
+#logarithmicChartcases {
+  width: 100%;
+  height: 730px;
+}
+
+#logarithmicChartdeaths {
   width: 100%;
   height: 730px;
 }
@@ -250,7 +259,7 @@ canvas {
     width: 90%;
   }
 
-  .secondRowContainer {
+  .columnChartAndTotalsContainer {
     display: flex;
     flex-direction: column;
   } 
