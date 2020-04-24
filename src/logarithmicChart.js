@@ -12,9 +12,9 @@ import {
 } from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
-import am4themes_dark from '@amcharts/amcharts4/themes/dark';
-import am4themes_dataviz from '@amcharts/amcharts4/themes/dataviz';
+import am4themes_moonrisekingdom from "@amcharts/amcharts4/themes/moonrisekingdom";
 import { balkanCountries, countryCodes } from './constants';
+
 
 const covidApi = new NovelCovid();
 const { BOSNIA, SLOVENIA, CROATIA, SERBIA, GREECE } = balkanCountries;
@@ -22,13 +22,10 @@ const { BA, SI, HR, RS, GR } = countryCodes;
 
 function startLogarithmicChart(dataType) {
   ready(async function () {
-    useTheme(am4themes_dark);
-    useTheme(am4themes_dataviz);
+    useTheme(am4themes_moonrisekingdom);
     useTheme(am4themes_animated);
 
     const chartType = 'logarithmicChart' + dataType;
-
-    console.log('CHART TYPE', chartType);
 
     let chart = create(chartType, am4charts.XYChart);
     chart.dateFormatter.dateFormat = 'yyyy/MM/dd';
