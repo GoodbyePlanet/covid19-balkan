@@ -89,6 +89,13 @@ canvas {
   justify-content: center;
 }
 
+.pieContainer {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
 #particles-js {
   position: fixed;
   width: 100%;
@@ -114,6 +121,11 @@ canvas {
 #columnChart {
   width: 100%;
   height: 550px;
+}
+
+#pieChart {
+  width: 100%;
+  height: 600px;
 }
 
 #open-modal-button {

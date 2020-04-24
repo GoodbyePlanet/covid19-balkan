@@ -7,12 +7,14 @@ import startRadarChart from './radarChart';
 import startLogarithmicChart from './logarithmicChart';
 import particlesConfig from './particlesConfig';
 import startColumnChart from './columnChart';
+import start3dPieChart from './3dPieChart';
 
 const covidApi = new NovelCovid();
 
 startRadarChart();
 startLogarithmicChart('cases');
 startLogarithmicChart('deaths');
+start3dPieChart()
 printTotalCountsOnBalkan();
 startColumnChart();
 
