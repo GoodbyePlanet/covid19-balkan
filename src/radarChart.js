@@ -14,7 +14,6 @@ function startRadarChart() {
   ready(async function () {
     useTheme(am4themes_dataviz);
     useTheme(am4themes_animated);
-    options.onlyShowOnViewport = true;
 
     let chart = create("radarChart", am4charts.RadarChart);
 
