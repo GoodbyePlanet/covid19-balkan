@@ -9,6 +9,7 @@ import {
   Rectangle,
   Triangle,
   InterfaceColorSet,
+  options,
 } from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
@@ -24,6 +25,7 @@ function startLogarithmicChart(dataType) {
   ready(async function () {
     useTheme(am4themes_moonrisekingdom);
     useTheme(am4themes_animated);
+    options.onlyShowOnViewport = true;
 
     const chartType = 'logarithmicChart' + dataType;
 
