@@ -21,11 +21,12 @@ const covidApi = new NovelCovid();
 const { BOSNIA, SLOVENIA, CROATIA, SERBIA, GREECE } = balkanCountries;
 const { BA, SI, HR, RS, GR } = countryCodes;
 
+options.queue = true;
+options.onlyShowOnViewport = true;
+
 function startLogarithmicChart(dataType) {
   ready(async function () {
     useTheme(am4themes_moonrisekingdom);
-    useTheme(am4themes_animated);
-    options.onlyShowOnViewport = true;
 
     const chartType = 'logarithmicChart' + dataType;
 

@@ -2,7 +2,6 @@ import regeneratorRuntime from "regenerator-runtime";
 import { NovelCovid } from "novelcovid";
 import { ready, useTheme, percent, create, color, options } from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
-import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import am4themes_dataviz from "@amcharts/amcharts4/themes/dataviz";
 import { balkanCountries } from "./constants";
 import { tooltip } from "./tooltip";
@@ -10,10 +9,11 @@ import { tooltip } from "./tooltip";
 const covidApi = new NovelCovid();
 const { MACEDONIA, BOSNIA } = balkanCountries;
 
+options.queue = true;
+
 function startRadarChart() {
   ready(async function () {
     useTheme(am4themes_dataviz);
-    useTheme(am4themes_animated);
 
     let chart = create("radarChart", am4charts.RadarChart);
 
