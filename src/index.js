@@ -14,7 +14,7 @@ const covidApi = new NovelCovid();
 startRadarChart();
 startLogarithmicChart('cases');
 startLogarithmicChart('deaths');
-start3dPieChart()
+start3dPieChart();
 printTotalCountsOnBalkan();
 startColumnChart();
 

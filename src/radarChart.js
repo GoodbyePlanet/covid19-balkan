@@ -3,7 +3,6 @@ import { NovelCovid } from "novelcovid";
 import { ready, useTheme, percent, create, color } from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import am4themes_dark from "@amcharts/amcharts4/themes/dark";
 import am4themes_dataviz from "@amcharts/amcharts4/themes/dataviz";
 import { balkanCountries } from "./constants";
 import { tooltip } from "./tooltip";
@@ -13,16 +12,18 @@ const { MACEDONIA, BOSNIA } = balkanCountries;
 
 function startRadarChart() {
   ready(async function () {
-    useTheme(am4themes_dark);
     useTheme(am4themes_dataviz);
     useTheme(am4themes_animated);
 
     let chart = create("radarChart", am4charts.RadarChart);
 
     chart.responsive.enabled = true;
+    chart.preloader.fill = '#FFFFFF';
+    chart.preloader.opacity = 0.6;
+    chart.preloader.visible = true;
 
     chart.data = renameCountryNames(await getData());
-    chart.innerRadius = percent(40);
+    chart.innerRadius = percent(36);
 
     let title = chart.titles.create();
     title.text = 'Radar chart';
