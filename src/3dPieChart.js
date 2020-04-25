@@ -7,33 +7,34 @@ import {
   create,
   color,
 } from '@amcharts/amcharts4/core';
-import am4themes_dataviz from "@amcharts/amcharts4/themes/dataviz";
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import { balkanCountries } from './constants';
 
 const covidApi = new NovelCovid();
 
 const chartColors = [
-  '#2c7a22',
-  '#02ad8b',
-  '#143014',
-  '#449595',
-  '#bd6763',
+  '#fa6e6e',
+  '#c73839',
+  '#902c2d',
+  '#f05440',
+  '#d5433d',
   '#EE3F28',
-  '#6b0108',
+  '#902c2d',
   '#8C1A0B',
-  '#396478',
+  '#283250',
 ];
 
 function start3dPieChart() {
   ready(async function () {
-    useTheme(am4themes_dataviz);
     useTheme(am4themes_animated);
 
     let chart = create('pieChart', am4charts.PieChart3D);
     chart.hiddenState.properties.opacity = 0; // Initial fade-in
+    chart.preloader.fill = '#FFFFFF';
+    chart.preloader.opacity = 0.6;
+    chart.preloader.visible = true;
 
-    chart.data = renameCountryNames(await getTestsCounductedForCountries());    
+    chart.data = renameCountryNames(await getTestsCounductedForCountries());
 
     let title = chart.titles.create();
     title.text = `Pie chart - Total Tests Conducted`;
@@ -70,7 +71,7 @@ function start3dPieChart() {
     series.legendSettings.labelText = '[bold {color}]{category}[/]';
 
     // Set slice color
-    // series.slices.template.propertyFields.fill = "color";
+    series.slices.template.propertyFields.fill = "color";
   });
 }
 
@@ -96,7 +97,7 @@ async function getTestsCounductedForCountries() {
       testsConducted.push({
         country,
         tests,
-        // color: color(chartColors[colorIndex]),
+        color: color(chartColors[colorIndex]),
       });
       colorIndex++;
     }

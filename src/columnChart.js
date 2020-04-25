@@ -17,6 +17,10 @@ function startColumnChart() {
 
     let chart = am4core.create('columnChart', am4charts.XYChart3D);
     chart.colors.list = [am4core.color('#8C2B2C'), am4core.color('#28314E')];
+    chart.preloader.fill = '#FFFFFF';
+    chart.preloader.opacity = 0.6;
+    chart.preloader.visible = true;
+    
     chart.data = renameCountryNames(await getData()).reverse();
 
     chart.paddingTop = 40;
