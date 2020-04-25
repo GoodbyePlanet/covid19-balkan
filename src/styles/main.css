@@ -74,7 +74,7 @@ canvas {
   justify-content: center;
 }
 
-.deathsContainer {
+.deathsAndTotalTestsContainer {
   display: flex;
 }
 
@@ -274,5 +274,10 @@ canvas {
   .columnChartAndTotalsContainer {
     display: flex;
     flex-direction: column;
-  } 
+  }
+
+  .deathsAndTotalTestsContainer {
+    display: flex;
+    flex-direction: column;
+  }
 }
