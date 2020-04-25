@@ -25,10 +25,12 @@ const chartColors = [
   '#283250',
 ];
 
+options.queue = true;
+options.onlyShowOnViewport = true;
+
 function start3dPieChart() {
   ready(async function () {
     useTheme(am4themes_animated);
-    options.onlyShowOnViewport = true;
 
     let chart = create('pieChart', am4charts.PieChart3D);
     chart.hiddenState.properties.opacity = 0; // Initial fade-in

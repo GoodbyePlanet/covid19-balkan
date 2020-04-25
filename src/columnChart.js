@@ -8,12 +8,14 @@ import { balkanCountries } from './constants';
 
 const covidApi = new NovelCovid();
 
+am4core.options.queue = true;
+am4core.options.onlyShowOnViewport = true;
+
 function startColumnChart() {
   am4core.ready(async function () {
     am4core.useTheme(am4themes_dark);
     am4core.useTheme(am4themes_animated);
     am4core.options.autoSetClassName = true;
-    am4core.options.onlyShowOnViewport = true;
 
     let chart = am4core.create('columnChart', am4charts.XYChart3D);
     chart.colors.list = [am4core.color('#8C2B2C'), am4core.color('#28314E')];
