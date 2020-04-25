@@ -1,6 +1,6 @@
 import regeneratorRuntime from "regenerator-runtime";
 import { NovelCovid } from "novelcovid";
-import { ready, useTheme, percent, create, color } from "@amcharts/amcharts4/core";
+import { ready, useTheme, percent, create, color, options } from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import am4themes_dataviz from "@amcharts/amcharts4/themes/dataviz";
@@ -14,6 +14,7 @@ function startRadarChart() {
   ready(async function () {
     useTheme(am4themes_dataviz);
     useTheme(am4themes_animated);
+    options.onlyShowOnViewport = true;
 
     let chart = create("radarChart", am4charts.RadarChart);
 

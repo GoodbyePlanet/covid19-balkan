@@ -11,8 +11,8 @@ import start3dPieChart from './3dPieChart';
 
 const covidApi = new NovelCovid();
 
-startRadarChart();
-startLogarithmicChart('cases');
+// startRadarChart();
+// startLogarithmicChart('cases');
 startLogarithmicChart('deaths');
 start3dPieChart();
 printTotalCountsOnBalkan();

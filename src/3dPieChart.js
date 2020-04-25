@@ -6,6 +6,7 @@ import {
   percent,
   create,
   color,
+  options,
 } from '@amcharts/amcharts4/core';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import { balkanCountries } from './constants';
@@ -15,7 +16,7 @@ const covidApi = new NovelCovid();
 const chartColors = [
   '#fa6e6e',
   '#c73839',
-  '#902c2d',
+  '#822825',
   '#f05440',
   '#d5433d',
   '#EE3F28',
@@ -27,6 +28,7 @@ const chartColors = [
 function start3dPieChart() {
   ready(async function () {
     useTheme(am4themes_animated);
+    options.onlyShowOnViewport = true;
 
     let chart = create('pieChart', am4charts.PieChart3D);
     chart.hiddenState.properties.opacity = 0; // Initial fade-in
@@ -48,6 +50,8 @@ function start3dPieChart() {
 
     chart.legend = new am4charts.Legend();
     chart.legend.useDefaultMarker = true;
+    chart.legend.width = 900;
+
     let marker = chart.legend.markers.template.children.getIndex(0);
     marker.cornerRadius(12, 12, 12, 12);
     marker.strokeWidth = 2;
@@ -56,8 +60,6 @@ function start3dPieChart() {
     marker.height = 12;
     marker.paddingTop = 10;
 
-    // chart.legend.valueLabels.template.text = "{value.value}";
-    // chart.legend.labels.template.text = "bold {color}]{category}[/]";
     chart.legend.valueLabels.template.text = '[bold {color}][/]';
 
     let series = chart.series.push(new am4charts.PieSeries3D());
