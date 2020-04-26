@@ -3,7 +3,7 @@
 The purpose of this project is to provide overview of simple, chart visualized data about the current
 impact of COVID-19 in the Balkan countries.
 
-Web app is created with vanila JavaScript. Web app link: https://covid19-balkan.now.sh/
+Web app is created with vanila JavaScript. Web app links: https://covid19-balkan.now.sh/ || https://covid19-balkan.com
 
 ![Covid19](src/assets/covid19-g1.gif)
 ![Covid19](src/assets/covid19-g2.gif)
