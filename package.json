@@ -20,6 +20,7 @@
   "dependencies": {
     "@amcharts/amcharts4": "^4.9.12",
     "@types/core-js": "^2.5.3",
+    "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "countup.js": "^2.0.4",
     "novelcovid": "^1.2.4",
