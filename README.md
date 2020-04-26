@@ -5,7 +5,9 @@ impact of COVID-19 in the Balkan countries.
 
 Web app is created with vanila JavaScript. Web app link: https://covid19-balkan.now.sh/
 
-![Covid19](src/assets/covid19-g.gif)
+![Covid19](src/assets/covid19-g1.gif)
+![Covid19](src/assets/covid19-g2.gif)
+![Covid19](src/assets/covid19-g3.gif)
 
 ## Installing
 
