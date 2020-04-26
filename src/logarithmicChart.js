@@ -1,4 +1,5 @@
 import regeneratorRuntime from 'regenerator-runtime';
+import axios from 'axios';
 import { NovelCovid } from 'novelcovid';
 import {
   ready,
@@ -12,10 +13,8 @@ import {
   options,
 } from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
-import am4themes_animated from '@amcharts/amcharts4/themes/animated';
-import am4themes_moonrisekingdom from "@amcharts/amcharts4/themes/moonrisekingdom";
+import am4themes_moonrisekingdom from '@amcharts/amcharts4/themes/moonrisekingdom';
 import { balkanCountries, countryCodes } from './constants';
-
 
 const covidApi = new NovelCovid();
 const { BOSNIA, SLOVENIA, CROATIA, SERBIA, GREECE } = balkanCountries;
@@ -28,6 +27,7 @@ function startLogarithmicChart(dataType) {
   ready(async function () {
     useTheme(am4themes_moonrisekingdom);
 
+    const userLocation = await getUserLocation();
     const chartType = 'logarithmicChart' + dataType;
 
     let chart = create(chartType, am4charts.XYChart);
@@ -42,8 +42,7 @@ function startLogarithmicChart(dataType) {
     chart.preloader.visible = true;
 
     let title = chart.titles.create();
-    title.text =
-      `Logarithmic chart - last 30 days data - confirmed ${dataType} per day`;
+    title.text = `Logarithmic chart - last 30 days data - confirmed ${dataType} per day`;
     title.fontSize = 16;
     title.marginBottom = 20;
     title.fill = color('#ef6666');
@@ -57,7 +56,7 @@ function startLogarithmicChart(dataType) {
     valueAxis.logarithmic = true;
     valueAxis.renderer.minGridDistance = 20;
 
-    function createSeries(field, name, bullet) {
+    function createSeries(field, name, bullet, hiddenSeries) {
       let series = chart.series.push(new am4charts.LineSeries());
 
       series.zIndex = 1;
@@ -79,9 +78,7 @@ function startLogarithmicChart(dataType) {
         chart.feedLegend();
       }
 
-      if (field === SI || field === BA) {
-        series.hidden = true;
-      }
+      series.hidden = hiddenSeries;
 
       let interfaceColors = new InterfaceColorSet();
 
@@ -129,11 +126,13 @@ function startLogarithmicChart(dataType) {
       range.label.inside = true;
     }
 
-    createSeries(RS, SERBIA, 'rectangle');
-    createSeries(GR, GREECE, 'triangle');
-    createSeries(HR, CROATIA);
-    createSeries(SI, SLOVENIA);
-    createSeries(BA, 'BIH');
+    const countryCode = userLocation.data.countryCode;
+
+    createSeries(RS, SERBIA, 'rectangle', hiddenSeries(countryCode, RS));
+    createSeries(GR, GREECE, 'triangle', hiddenSeries(countryCode, GR));
+    createSeries(HR, CROATIA, 'circle', hiddenSeries(countryCode, HR));
+    createSeries(SI, SLOVENIA, 'circle', hiddenSeries(countryCode, SI));
+    createSeries(BA, 'BIH', 'circle', hiddenSeries(countryCode, BA));
 
     chart.legend = new am4charts.Legend();
 
@@ -146,6 +145,30 @@ function startLogarithmicChart(dataType) {
 
     chart.scrollbarX = new Scrollbar();
   });
+}
+
+function hiddenSeries(userLocationCountryCode, seriesCountryCode) {
+  const balkanCountry = Object.values(countryCodes).includes(
+    userLocationCountryCode,
+  );
+
+  if (!balkanCountry || [RS, GR].includes(userLocationCountryCode)) {
+    return seriesCountryCode === BA || seriesCountryCode === SI;
+  }
+
+  if (userLocationCountryCode === seriesCountryCode) {
+    return false; // Don't hidde series that represent the user country
+  }
+
+  return [HR, SI, BA].includes(seriesCountryCode);
+}
+
+async function getUserLocation() {
+  try {
+    return axios.get('https://extreme-ip-lookup.com/json/');
+  } catch (error) {
+    console.log('An error has occurred', error);
+  }
 }
 
 async function getHistoricalData(dataType) {
