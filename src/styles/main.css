@@ -156,6 +156,36 @@ canvas {
   transition: all 0.4s ease 0s;
 }
 
+#infected {
+  padding-right: 10px;
+  color: yellow;
+}
+
+#infectedCount {
+  color: yellow;
+  padding-top: 1px;
+}
+
+#deaths {
+  padding-right: 10px;
+  color: red;
+}
+
+#deathsCount {
+  color: red;
+  padding-top: 1px;
+}
+
+#recovered {
+  padding-right: 10px;
+  color: green;
+}
+
+#recoveredCount {
+  color: green;
+  padding-top: 1px;
+}
+
 #icon {
   padding-right: 15px;
   color: #8c2b2c;
@@ -217,6 +247,11 @@ canvas {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.total-number {
+  display: flex;
+  padding-right: 10px;
 }
 
 /* Media Queries */
