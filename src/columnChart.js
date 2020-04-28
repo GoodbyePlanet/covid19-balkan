@@ -1,8 +1,6 @@
-/* Imports */
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_dark from '@amcharts/amcharts4/themes/dark';
-import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import { NovelCovid } from 'novelcovid';
 import { balkanCountries } from './constants';
 
@@ -14,7 +12,6 @@ am4core.options.onlyShowOnViewport = true;
 function startColumnChart() {
   am4core.ready(async function () {
     am4core.useTheme(am4themes_dark);
-    am4core.useTheme(am4themes_animated);
     am4core.options.autoSetClassName = true;
 
     let chart = am4core.create('columnChart', am4charts.XYChart3D);
