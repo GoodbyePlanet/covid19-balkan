@@ -57,7 +57,6 @@ function start3dPieChart() {
     let marker = chart.legend.markers.template.children.getIndex(0);
     marker.cornerRadius(12, 12, 12, 12);
     marker.strokeWidth = 2;
-    marker.strokeOpacity = 1;
     marker.width = 12;
     marker.height = 12;
     marker.paddingTop = 10;

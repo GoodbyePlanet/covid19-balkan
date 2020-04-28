@@ -121,7 +121,6 @@ function startLogarithmicChart(dataType) {
       range.value = 90.4;
       range.grid.stroke = color('#396478');
       range.grid.strokeWidth = 1;
-      range.grid.strokeOpacity = 1;
       range.grid.strokeDasharray = '3,3';
       range.label.inside = true;
     }

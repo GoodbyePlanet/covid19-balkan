@@ -38,7 +38,6 @@ function startRadarChart() {
     categoryAxis.renderer.minGridDistance = 60;
     categoryAxis.renderer.inversed = true;
     categoryAxis.renderer.labels.template.location = 0.5;
-    categoryAxis.renderer.grid.template.strokeOpacity = 0.08;
 
     let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.min = 0;
