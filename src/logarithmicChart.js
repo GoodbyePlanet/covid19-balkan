@@ -34,6 +34,8 @@ function startLogarithmicChart(dataType) {
     chart.dateFormatter.dateFormat = 'yyyy/MM/dd';
     chart.responsive.enabled = true;
 
+    console.log('HISTORICAL DATA', await getHistoricalData(dataType));
+
     chart.data = await getHistoricalData(dataType);
     chart.colors.step = 2;
 
@@ -177,7 +179,7 @@ async function getHistoricalData(dataType) {
 
   return Object.keys(groups).map((date) => {
     return {
-      date,
+      date: new Date(date),
       RS: findByPropertyName(groups, date, RS).RS,
       GR: findByPropertyName(groups, date, GR).GR,
       HR: findByPropertyName(groups, date, HR).HR,
