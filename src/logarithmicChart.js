@@ -34,8 +34,6 @@ function startLogarithmicChart(dataType) {
     chart.dateFormatter.dateFormat = 'yyyy/MM/dd';
     chart.responsive.enabled = true;
 
-    console.log('HISTORICAL DATA', await getHistoricalData(dataType));
-
     chart.data = await getHistoricalData(dataType);
     chart.colors.step = 2;
 
