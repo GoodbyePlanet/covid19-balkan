@@ -16,6 +16,7 @@ function startRadarChart() {
     useTheme(am4themes_dataviz);
 
     let chart = create("radarChart", am4charts.RadarChart);
+    chart.numberFormatter.numberFormat = "#a";
 
     chart.responsive.enabled = true;
     chart.preloader.fill = '#FFFFFF';
