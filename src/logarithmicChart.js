@@ -17,8 +17,8 @@ import am4themes_moonrisekingdom from '@amcharts/amcharts4/themes/moonrisekingdo
 import { balkanCountries, countryCodes } from './constants';
 
 const covidApi = new NovelCovid();
-const { BOSNIA, SLOVENIA, CROATIA, SERBIA, GREECE } = balkanCountries;
-const { BA, SI, HR, RS, GR } = countryCodes;
+const { BOSNIA, BULGARIA, CROATIA, SERBIA, GREECE } = balkanCountries;
+const { BA, BG, HR, RS, GR } = countryCodes;
 
 options.queue = true;
 options.onlyShowOnViewport = true;
@@ -130,7 +130,7 @@ function startLogarithmicChart(dataType) {
     createSeries(RS, SERBIA, 'rectangle', hiddenSeries(countryCode, RS));
     createSeries(GR, GREECE, 'triangle', hiddenSeries(countryCode, GR));
     createSeries(HR, CROATIA, 'circle', hiddenSeries(countryCode, HR));
-    createSeries(SI, SLOVENIA, 'circle', hiddenSeries(countryCode, SI));
+    createSeries(BG, BULGARIA, 'circle', hiddenSeries(countryCode, BG));
     createSeries(BA, 'BIH', 'circle', hiddenSeries(countryCode, BA));
 
     chart.legend = new am4charts.Legend();
@@ -152,14 +152,14 @@ function hiddenSeries(userLocationCountryCode, seriesCountryCode) {
   );
 
   if (!balkanCountry || [RS, GR].includes(userLocationCountryCode)) {
-    return seriesCountryCode === BA || seriesCountryCode === SI;
+    return seriesCountryCode === BA || seriesCountryCode === BG;
   }
 
   if (userLocationCountryCode === seriesCountryCode) {
     return false; // Don't hidde series that represent the user country
   }
 
-  return [HR, SI, BA].includes(seriesCountryCode);
+  return [HR, BG, BA].includes(seriesCountryCode);
 }
 
 async function getUserLocation() {
@@ -181,7 +181,7 @@ async function getHistoricalData(dataType) {
       RS: findByPropertyName(groups, date, RS).RS,
       GR: findByPropertyName(groups, date, GR).GR,
       HR: findByPropertyName(groups, date, HR).HR,
-      SI: findByPropertyName(groups, date, SI).SI,
+      BG: findByPropertyName(groups, date, BG).BG,
       BA: findByPropertyName(groups, date, BA).BA,
     };
   });
@@ -191,10 +191,10 @@ function getCountriesHistoricalData(dataType) {
   const serbia = getHistoricalDataForCountry(dataType, SERBIA, RS);
   const greece = getHistoricalDataForCountry(dataType, GREECE, GR);
   const croatia = getHistoricalDataForCountry(dataType, CROATIA, HR);
-  const slovenia = getHistoricalDataForCountry(dataType, SLOVENIA, SI);
+  const bulgaria = getHistoricalDataForCountry(dataType, BULGARIA, BG);
   const bosnia = getHistoricalDataForCountry(dataType, BOSNIA, BA);
 
-  return Promise.all([serbia, greece, croatia, slovenia, bosnia]);
+  return Promise.all([serbia, greece, croatia, bulgaria, bosnia]);
 }
 
 function groupDataByDate(data) {
