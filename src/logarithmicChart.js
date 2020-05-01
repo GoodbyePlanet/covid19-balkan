@@ -33,6 +33,7 @@ function startLogarithmicChart(dataType) {
     let chart = create(chartType, am4charts.XYChart);
     chart.dateFormatter.dateFormat = 'yyyy/MM/dd';
     chart.responsive.enabled = true;
+    chart.numberFormatter.numberFormat = "#a";
 
     chart.data = await getHistoricalData(dataType);
     chart.colors.step = 2;
