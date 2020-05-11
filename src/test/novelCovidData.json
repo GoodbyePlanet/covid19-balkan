@@ -1,0 +1,50 @@
+[
+  {
+    "updated": 1589194943922,
+    "country": "Serbia",
+    "countryInfo": {
+      "_id": 688,
+      "iso2": "RS",
+      "iso3": "SRB",
+      "lat": 44,
+      "long": 21,
+      "flag": "https://disease.sh/assets/img/flags/rs.png"
+    },
+    "cases": 10114,
+    "todayCases": 0,
+    "deaths": 215,
+    "todayDeaths": 0,
+    "recovered": 3006,
+    "active": 6893,
+    "critical": 43,
+    "casesPerOneMillion": 1158,
+    "deathsPerOneMillion": 25,
+    "tests": 140592,
+    "testsPerOneMillion": 16091,
+    "continent": "Europe"
+  },
+  {
+    "updated": 1589194944131,
+    "country": "Montenegro",
+    "countryInfo": {
+      "_id": 499,
+      "iso2": "ME",
+      "iso3": "MNE",
+      "lat": 42,
+      "long": 19,
+      "flag": "https://disease.sh/assets/img/flags/me.png"
+    },
+    "cases": 324,
+    "todayCases": 0,
+    "deaths": 9,
+    "todayDeaths": 0,
+    "recovered": 290,
+    "active": 25,
+    "critical": 2,
+    "casesPerOneMillion": 516,
+    "deathsPerOneMillion": 14,
+    "tests": 7816,
+    "testsPerOneMillion": 12445,
+    "continent": "Europe"
+  }
+]

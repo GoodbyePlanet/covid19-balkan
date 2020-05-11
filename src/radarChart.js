@@ -6,7 +6,6 @@ import am4themes_dataviz from "@amcharts/amcharts4/themes/dataviz";
 import { balkanCountries } from "./constants";
 import { tooltip } from "./tooltip";
 
-const covidApi = new NovelCovid();
 const { MACEDONIA, BOSNIA } = balkanCountries;
 
 options.queue = true;
@@ -23,7 +22,7 @@ function startRadarChart() {
     chart.preloader.opacity = 0.6;
     chart.preloader.visible = true;
 
-    chart.data = renameCountryNames(await getData());
+    chart.data = renameCountryNames(await getTransformedCountryData());
     chart.innerRadius = percent(36);
 
     let title = chart.titles.create();
@@ -90,7 +89,7 @@ function renameCountryNames(covidData) {
   });
 }
 
-async function getData() {
+async function getTransformedCountryData() {
   const countriesCovid = [];
   try {
     for (const c of await getCountryData()) {
@@ -124,6 +123,7 @@ async function getData() {
 
 async function getCountryData() {
   try {
+    const covidApi = new NovelCovid();
     return covidApi.countries(Object.values(balkanCountries).join(","));
   } catch(error) {
     console.error('An error has occurred', error);
@@ -138,3 +138,4 @@ async function getCountryData() {
 }
 
 export default startRadarChart;
+export { renameCountryNames, getCountryData, getTransformedCountryData };
