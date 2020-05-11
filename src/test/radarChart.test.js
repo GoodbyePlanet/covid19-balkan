@@ -1,13 +1,10 @@
 import {
-  renameCountryNames,
   getCountryData,
   getTransformedCountryData,
 } from '../radarChart';
 import { balkanCountries } from '../constants';
 import { NovelCovid } from 'novelcovid';
 import novelCovidData from './novelCovidData.json';
-
-const { MACEDONIA, BOSNIA } = balkanCountries;
 
 jest.mock('NovelCovid');
 const countries = jest.fn().mockResolvedValue(novelCovidData);
@@ -19,18 +16,6 @@ beforeEach(() => {
 });
 
 describe('Test Radar Chart', () => {
-  it('should rename country names', () => {
-    const renamedItems = renameCountryNames([
-      {
-        country: 'Bosnia',
-      },
-      { country: 'Macedonia' },
-    ]);
-
-    expect(renamedItems[0].country).toEqual(BOSNIA);
-    expect(renamedItems[1].country).toEqual(MACEDONIA);
-  });
-
   it('should return countries data', async () => {
     const countriesData = await getCountryData();
 

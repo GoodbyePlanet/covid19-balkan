@@ -3,6 +3,7 @@ import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_dark from '@amcharts/amcharts4/themes/dark';
 import { NovelCovid } from 'novelcovid';
 import { balkanCountries } from './constants';
+import { renameCountryNames } from "./utils";
 
 const covidApi = new NovelCovid();
 
@@ -20,7 +21,7 @@ function startColumnChart() {
     chart.preloader.opacity = 0.6;
     chart.preloader.visible = true;
     
-    chart.data = renameCountryNames(await getData()).reverse();
+    chart.data = renameCountryNames(await getData(), 'N. Macedonia', 'BIH').reverse();
 
     chart.paddingTop = 40;
 
@@ -88,18 +89,6 @@ async function getCountryData() {
     const container = document.getElementsByClassName('coulmnContainer');
     container[0].appendChild(div);
   }
-}
-
-function renameCountryNames(covidData) {
-  return covidData.map((item) => {
-    if (item.country === 'Macedonia') {
-      item.country = 'N. Macedonia';
-    }
-    if (item.country === 'Bosnia') {
-      item.country = 'BiH';
-    }
-    return item;
-  });
 }
 
 export default startColumnChart;

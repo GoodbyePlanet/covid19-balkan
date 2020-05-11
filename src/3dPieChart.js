@@ -10,6 +10,7 @@ import {
 } from '@amcharts/amcharts4/core';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import { balkanCountries } from './constants';
+import { renameCountryNames } from './utils';
 
 const covidApi = new NovelCovid();
 
@@ -38,7 +39,11 @@ function start3dPieChart() {
     chart.preloader.opacity = 0.6;
     chart.preloader.visible = true;
 
-    chart.data = renameCountryNames(await getTestsCounductedForCountries());
+    chart.data = renameCountryNames(
+      await getTestsCounductedForCountries(),
+      'N. Macedonia',
+      'BIH',
+    );
 
     let title = chart.titles.create();
     title.text = `Pie chart - Total Tests Conducted`;
@@ -74,19 +79,7 @@ function start3dPieChart() {
     series.legendSettings.labelText = '[bold {color}]{category}[/]';
 
     // Set slice color
-    series.slices.template.propertyFields.fill = "color";
-  });
-}
-
-function renameCountryNames(covidData) {
-  return covidData.map((item) => {
-    if (item.country === 'Macedonia') {
-      item.country = 'N. Macedonia';
-    }
-    if (item.country === 'Bosnia') {
-      item.country = 'BIH';
-    }
-    return item;
+    series.slices.template.propertyFields.fill = 'color';
   });
 }
 
