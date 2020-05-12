@@ -22,7 +22,7 @@ const { BA, BG, HR, RS, GR } = countryCodes;
 
 options.queue = true;
 options.onlyShowOnViewport = true;
-const IP_LOOKUP = 'https://extreme-ip-lookup.com/json/';
+const IP_LOOKUP_URL = 'https://extreme-ip-lookup.com/json/';
 
 function startLogarithmicChart(dataType) {
   ready(async function () {
@@ -169,7 +169,7 @@ function hiddenSeries(userLocationCountryCode, seriesCountryCode) {
 
 async function getUserLocation() {
   try {
-    return axios.get(IP_LOOKUP);
+    return axios.get(IP_LOOKUP_URL);
   } catch (error) {
     console.log('An error has occurred', error);
   }
