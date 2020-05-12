@@ -16,7 +16,6 @@ import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_moonrisekingdom from '@amcharts/amcharts4/themes/moonrisekingdom';
 import { balkanCountries, countryCodes } from './constants';
 
-const covidApi = new NovelCovid();
 const { BOSNIA, BULGARIA, CROATIA, SERBIA, GREECE } = balkanCountries;
 const { BA, BG, HR, RS, GR } = countryCodes;
 
@@ -180,6 +179,8 @@ async function getHistoricalData(dataType) {
 
   const groups = groupDataByDate(countriesHistory.flat());
 
+  console.log('GROUPS', groups);
+
   return Object.keys(groups).map((date) => {
     return {
       date: new Date(date),
@@ -219,7 +220,7 @@ function findByPropertyName(groups, date, property) {
 }
 
 async function getHistoricalDataForCountry(dataType, country, fieldName) {
-  const historicalCases = await getHistoricalCasesData(dataType, country);
+  const historicalCases = await getHistoryTimelineData(dataType, country);
 
   return Object.entries(historicalCases).map((item) => ({
     date: item[0],
@@ -227,8 +228,9 @@ async function getHistoricalDataForCountry(dataType, country, fieldName) {
   }));
 }
 
-async function getHistoricalCasesData(dataType, country) {
+async function getHistoryTimelineData(dataType, country) {
   try {
+    const covidApi = new NovelCovid();
     const historical = await covidApi.historical(null, country);
 
     if (dataType === 'deaths') {
@@ -250,4 +252,11 @@ async function getHistoricalCasesData(dataType, country) {
 }
 
 export default startLogarithmicChart;
-export { getUserLocation, hiddenSeries };
+export {
+  getUserLocation,
+  hiddenSeries,
+  getHistoryTimelineData,
+  getHistoricalDataForCountry,
+  getHistoricalData,
+  findByPropertyName,
+};
