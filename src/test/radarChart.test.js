@@ -2,7 +2,6 @@ import {
   getCountryData,
   getTransformedCountryData,
 } from '../radarChart';
-import { balkanCountries } from '../constants';
 import { NovelCovid } from 'novelcovid';
 import novelCovidData from './novelCovidData.json';
 
