@@ -179,8 +179,6 @@ async function getHistoricalData(dataType) {
 
   const groups = groupDataByDate(countriesHistory.flat());
 
-  console.log('GROUPS', groups);
-
   return Object.keys(groups).map((date) => {
     return {
       date: new Date(date),

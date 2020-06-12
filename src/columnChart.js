@@ -3,7 +3,7 @@ import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_dark from '@amcharts/amcharts4/themes/dark';
 import { NovelCovid } from 'novelcovid';
 import { balkanCountries } from './constants';
-import { renameCountryNames } from "./utils";
+import { renameCountryNames } from './utils';
 
 const covidApi = new NovelCovid();
 
@@ -16,12 +16,16 @@ function startColumnChart() {
     am4core.options.autoSetClassName = true;
 
     let chart = am4core.create('columnChart', am4charts.XYChart3D);
-    chart.colors.list = [am4core.color('#8C2B2C'), am4core.color('#28314E')];
+    chart.colors.list = [am4core.color('#28314E')];
     chart.preloader.fill = '#FFFFFF';
     chart.preloader.opacity = 0.6;
     chart.preloader.visible = true;
-    
-    chart.data = renameCountryNames(await getData(), 'N. Macedonia', 'BIH').reverse();
+
+    chart.data = renameCountryNames(
+      await getData(),
+      'N. Macedonia',
+      'BIH',
+    ).reverse();
 
     chart.paddingTop = 40;
 
@@ -42,17 +46,17 @@ function startColumnChart() {
 
     function createSeries(field) {
       let series = chart.series.push(new am4charts.ColumnSeries3D());
-      series.dataFields.valueY = field;
       series.dataFields.categoryX = 'country';
+      series.dataFields.valueY = field;
+      series.dataFields.valueX = 'deaths';
       series.name = field;
       series.clustered = false;
       series.columns.template.tooltipText =
-        '{country} {name}: [bold]{valueY}[/]';
+        '[bold]{country}[/] {name}: [bold]{valueY}[/] deaths: [bold]{valueX}[/]';
       series.columns.template.fillOpacity = 0.6;
       series.tooltip.pointerOrientation = 'vertical';
     }
 
-    createSeries('deaths');
     createSeries('recovered');
   });
 }
