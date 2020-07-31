@@ -33,7 +33,7 @@ function startRadarChart() {
     chart.data = renameCountryNames(
       await getTransformedCountryData(),
       MACEDONIA,
-      BOSNIA,
+      'BiH',
     );
     chart.innerRadius = percent(36);
 
