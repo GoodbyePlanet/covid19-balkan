@@ -1,16 +1,14 @@
-import axios from 'axios';
 import { NovelCovid } from 'novelcovid';
 import {
   getHistoryTimelineData,
   getHistoricalDataForCountry,
-  getHistoricalData,
   findByPropertyName,
 } from '../logarithmicChart';
 import { countryCodes, balkanCountries } from '../constants';
 import historicalDataJson from './historicalData.json';
 import groupsDataJson from './groupsData.json';
 
-const { BA, HR, BG, RS, GR } = countryCodes;
+const { RS } = countryCodes;
 const { SERBIA } = balkanCountries;
 
 jest.mock('NovelCovid');
