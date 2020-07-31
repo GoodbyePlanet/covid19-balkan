@@ -1,4 +1,4 @@
-const balkanCountries = {
+const balkanCountries = Object.freeze({
   MONTENEGRO: "Montenegro",
   ALBANIA: "Albania",
   MACEDONIA: "North Macedonia",
@@ -8,9 +8,9 @@ const balkanCountries = {
   CROATIA: "Croatia",
   SERBIA: "Serbia",
   GREECE: "Greece",
-};
+});
 
-const countryCodes = {
+const countryCodes = Object.freeze({
   ME: "ME",
   AL: "AL",
   MK: "MK",
@@ -20,6 +20,6 @@ const countryCodes = {
   HR: "HR",
   RS: "RS",
   GR: "GR",
-};
+});
 
 export { balkanCountries, countryCodes };

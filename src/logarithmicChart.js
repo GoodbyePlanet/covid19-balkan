@@ -1,5 +1,4 @@
 import regeneratorRuntime from 'regenerator-runtime';
-import axios from 'axios';
 import { NovelCovid } from 'novelcovid';
 import {
   ready,
@@ -16,18 +15,33 @@ import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_moonrisekingdom from '@amcharts/amcharts4/themes/moonrisekingdom';
 import { balkanCountries, countryCodes } from './constants';
 
-const { BOSNIA, BULGARIA, CROATIA, SERBIA, GREECE } = balkanCountries;
-const { BA, BG, HR, RS, GR } = countryCodes;
+const {
+  BULGARIA,
+  CROATIA,
+  SERBIA,
+  GREECE,
+  SLOVENIA,
+  ALBANIA,
+  MONTENEGRO,
+} = balkanCountries;
+const { BA, BG, HR, RS, GR, ME, MK, SI, AL } = countryCodes;
 
 options.queue = true;
 options.onlyShowOnViewport = true;
-const IP_LOOKUP_URL = 'https://extreme-ip-lookup.com/json/';
 
 function startLogarithmicChart(dataType) {
   ready(async function () {
+    const firstFive = await getFirstFiveCountries(dataType);
+    const [
+      { countryCode: firstCountryCode, name: firstName },
+      { countryCode: secondCountryCode, name: secondName },
+      { countryCode: thirdCountryCode, name: thirdName },
+      { countryCode: fourthCountryCode, name: fourthName },
+      { countryCode: fifthCountryCode, name: fifthName },
+    ] = firstFive;
+
     useTheme(am4themes_moonrisekingdom);
 
-    const userLocation = await getUserLocation();
     const chartType = 'logarithmicChart' + dataType;
 
     let chart = create(chartType, am4charts.XYChart);
@@ -38,7 +52,7 @@ function startLogarithmicChart(dataType) {
       chart.numberFormatter.numberFormat = '#a';
     }
 
-    chart.data = await getHistoricalData(dataType);
+    chart.data = await getHistoricalData(dataType, firstFive);
     chart.colors.step = 2;
 
     chart.preloader.fill = '#FFFFFF';
@@ -60,7 +74,7 @@ function startLogarithmicChart(dataType) {
     valueAxis.logarithmic = true;
     valueAxis.renderer.minGridDistance = 20;
 
-    function createSeries(field, name, bullet, hiddenSeries) {
+    function createSeries(field, name, bullet) {
       let series = chart.series.push(new am4charts.LineSeries());
 
       series.zIndex = 1;
@@ -75,14 +89,12 @@ function startLogarithmicChart(dataType) {
       series.tooltipText = `{name} ${dataType}: [bold]{valueY}[/]`;
       series.showOnInit = true;
 
-      if (field === RS) {
+      if (field === fifthCountryCode) {
         series.stroke = color('#396478');
         series.fill = color('#396478');
         series.invalidate();
         chart.feedLegend();
       }
-
-      series.hidden = hiddenSeries;
 
       let interfaceColors = new InterfaceColorSet();
 
@@ -129,13 +141,11 @@ function startLogarithmicChart(dataType) {
       range.label.inside = true;
     }
 
-    const countryCode = userLocation.data.countryCode;
-
-    createSeries(RS, SERBIA, 'rectangle', hiddenSeries(countryCode, RS));
-    createSeries(GR, GREECE, 'triangle', hiddenSeries(countryCode, GR));
-    createSeries(HR, CROATIA, 'circle', hiddenSeries(countryCode, HR));
-    createSeries(BG, BULGARIA, 'circle', hiddenSeries(countryCode, BG));
-    createSeries(BA, 'BIH', 'circle', hiddenSeries(countryCode, BA));
+    createSeries(firstCountryCode, switchName(firstName), 'rectangle');
+    createSeries(secondCountryCode, switchName(secondName), 'triangle');
+    createSeries(thirdCountryCode, switchName(thirdName), 'circle');
+    createSeries(fourthCountryCode, switchName(fourthName), 'circle');
+    createSeries(fifthCountryCode, switchName(fifthName), 'circle');
 
     chart.legend = new am4charts.Legend();
 
@@ -150,55 +160,79 @@ function startLogarithmicChart(dataType) {
   });
 }
 
-function hiddenSeries(userLocationCountryCode, seriesCountryCode) {
-  const balkanCountry = Object.values(countryCodes).includes(
-    userLocationCountryCode,
+async function getHistoricalData(dataType, firstFive) {
+  const countriesHistory = await getCountriesHistoricalData(
+    dataType,
+    firstFive,
   );
-
-  if (!balkanCountry || [RS, GR].includes(userLocationCountryCode)) {
-    return seriesCountryCode === BA || seriesCountryCode === BG;
-  }
-
-  if (userLocationCountryCode === seriesCountryCode) {
-    return false; // Don't hidde series that represent the user country
-  }
-
-  return [HR, BG, BA].includes(seriesCountryCode);
-}
-
-async function getUserLocation() {
-  try {
-    return axios.get(IP_LOOKUP_URL);
-  } catch (error) {
-    console.log('An error has occurred', error);
-  }
-}
-
-async function getHistoricalData(dataType) {
-  const countriesHistory = await getCountriesHistoricalData(dataType);
-
   const groups = groupDataByDate(countriesHistory.flat());
+
+  const [
+    { countryCode: firstCountryCode },
+    { countryCode: secondCountryCode },
+    { countryCode: thirdCountryCode },
+    { countryCode: fourthCountryCode },
+    { countryCode: fifthCountryCode },
+  ] = firstFive;
 
   return Object.keys(groups).map((date) => {
     return {
       date: new Date(date),
-      RS: findByPropertyName(groups, date, RS).RS,
-      GR: findByPropertyName(groups, date, GR).GR,
-      HR: findByPropertyName(groups, date, HR).HR,
-      BG: findByPropertyName(groups, date, BG).BG,
-      BA: findByPropertyName(groups, date, BA).BA,
+      [firstCountryCode]: findByPropertyName(groups, date, firstCountryCode)[
+        firstCountryCode
+      ],
+      [secondCountryCode]: findByPropertyName(groups, date, secondCountryCode)[
+        secondCountryCode
+      ],
+      [thirdCountryCode]: findByPropertyName(groups, date, thirdCountryCode)[
+        thirdCountryCode
+      ],
+      [fourthCountryCode]: findByPropertyName(groups, date, fourthCountryCode)[
+        fourthCountryCode
+      ],
+      [fifthCountryCode]: findByPropertyName(groups, date, fifthCountryCode)[
+        fifthCountryCode
+      ],
     };
   });
 }
 
-function getCountriesHistoricalData(dataType) {
-  const serbia = getHistoricalDataForCountry(dataType, SERBIA, RS);
-  const greece = getHistoricalDataForCountry(dataType, GREECE, GR);
-  const croatia = getHistoricalDataForCountry(dataType, CROATIA, HR);
-  const bulgaria = getHistoricalDataForCountry(dataType, BULGARIA, BG);
-  const bosnia = getHistoricalDataForCountry(dataType, BOSNIA, BA);
+function getCountriesHistoricalData(dataType, firstFive) {
+  const [
+    { countryCode: firstCountryCode, name: firstName },
+    { countryCode: secondCountryCode, name: secondName },
+    { countryCode: thirdCountryCode, name: thirdName },
+    { countryCode: fourthCountryCode, name: fourthName },
+    { countryCode: fifthCountryCode, name: fifthName },
+  ] = firstFive;
 
-  return Promise.all([serbia, greece, croatia, bulgaria, bosnia]);
+  const first = getHistoricalDataForCountry(
+    dataType,
+    firstName,
+    firstCountryCode,
+  );
+  const second = getHistoricalDataForCountry(
+    dataType,
+    secondName,
+    secondCountryCode,
+  );
+  const third = getHistoricalDataForCountry(
+    dataType,
+    thirdName,
+    thirdCountryCode,
+  );
+  const fourth = getHistoricalDataForCountry(
+    dataType,
+    fourthName,
+    fourthCountryCode,
+  );
+  const fifth = getHistoricalDataForCountry(
+    dataType,
+    fifthName,
+    fifthCountryCode,
+  );
+
+  return Promise.all([first, second, third, fourth, fifth]);
 }
 
 function groupDataByDate(data) {
@@ -249,10 +283,63 @@ async function getHistoryTimelineData(dataType, country) {
   }
 }
 
+async function getFirstFiveCountries(dataType) {
+  const countriesData = await getDataFromAllBalkanCountries();
+  return getSortedDataByProperty(countriesData, dataType).slice(-5);
+}
+
+function getSortedDataByProperty(countriesData, property) {
+  return countriesData
+    .map((item) => ({
+      countryCode: getCountryCode(item.country),
+      name: item.country,
+      [property]: item[property],
+    }))
+    .sort((countryA, countryB) => countryA[property] - countryB[property]);
+}
+
+function getCountryCode(countryName) {
+  switch (countryName) {
+    case SERBIA:
+      return RS;
+    case GREECE:
+      return GR;
+    case CROATIA:
+      return HR;
+    case SLOVENIA:
+      return SI;
+    case 'Bosnia':
+      return BA;
+    case BULGARIA:
+      return BG;
+    case 'Macedonia':
+      return MK;
+    case ALBANIA:
+      return AL;
+    case MONTENEGRO:
+      return ME;
+  }
+}
+
+function switchName(countryName) {
+  return countryName === 'Macedonia'
+    ? 'N. Macedonia'
+    : countryName === 'Bosnia'
+    ? 'BiH'
+    : countryName;
+}
+
+async function getDataFromAllBalkanCountries() {
+  try {
+    const covidApi = new NovelCovid();
+    return covidApi.countries(Object.values(balkanCountries).join(','));
+  } catch (error) {
+    console.error('An error has occurred', error);
+  }
+}
+
 export default startLogarithmicChart;
 export {
-  getUserLocation,
-  hiddenSeries,
   getHistoryTimelineData,
   getHistoricalDataForCountry,
   getHistoricalData,
