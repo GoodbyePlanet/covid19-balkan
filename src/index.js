@@ -11,24 +11,29 @@ import start3dPieChart from './3dPieChart';
 
 const covidApi = new NovelCovid();
 
-startRadarChart();
-startLogarithmicChart('cases');
-startLogarithmicChart('deaths');
-start3dPieChart();
-printTotalCountsOnBalkan();
-startColumnChart();
-
 async function getCountryData() {
-  return covidApi.countries(Object.values(balkanCountries).join(','));
+  try {
+    return covidApi.countries(Object.values(balkanCountries).join(','));
+  } catch (error) {
+    console.error('An error has occured', error);
+  }
 }
 
-async function printTotalCountsOnBalkan() {
+window.onload = async function () {
+  const covidData = await getCountryData();
+
+  startRadarChart(covidData);
+  startLogarithmicChart('cases', covidData);
+  startLogarithmicChart('deaths', covidData);
+  start3dPieChart(covidData);
+  startColumnChart(covidData);
+
   try {
     let infected = 0;
     let recovered = 0;
     let deaths = 0;
 
-    for (const c of await getCountryData()) {
+    for (const c of covidData) {
       infected += c.cases;
       recovered += c.recovered;
       deaths += c.deaths;
@@ -45,9 +50,7 @@ async function printTotalCountsOnBalkan() {
   } catch (error) {
     console.error('Error has occured', error);
   }
-}
 
-window.onload = async function () {
   function swapInfoLinks(args) {
     (this.items = document.querySelectorAll(args.selector)),
       (this.duration = args.duration),
@@ -107,7 +110,7 @@ window.onload = async function () {
     modal.style.display = 'none';
   };
 
-  const data = await getCountryData();
+  const data = covidData;
   document.getElementById('last-updated').innerHTML =
     'Data last updated ' + new Date(data[0].updated);
 

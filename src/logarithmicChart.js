@@ -29,9 +29,9 @@ const { BA, BG, HR, RS, GR, ME, MK, SI, AL } = countryCodes;
 options.queue = true;
 options.onlyShowOnViewport = true;
 
-function startLogarithmicChart(dataType) {
+function startLogarithmicChart(dataType, covidData) {
   ready(async function () {
-    const firstFive = await getFirstFiveCountries(dataType);
+    const firstFive = getFirstFiveCountries(dataType, covidData);
     const [
       { countryCode: firstCountryCode, name: firstName },
       { countryCode: secondCountryCode, name: secondName },
@@ -283,9 +283,8 @@ async function getHistoryTimelineData(dataType, country) {
   }
 }
 
-async function getFirstFiveCountries(dataType) {
-  const countriesData = await getDataFromAllBalkanCountries();
-  return getSortedDataByProperty(countriesData, dataType).slice(-5);
+function getFirstFiveCountries(dataType, covidData) {
+  return getSortedDataByProperty(covidData, dataType).slice(-5);
 }
 
 function getSortedDataByProperty(countriesData, property) {
@@ -327,15 +326,6 @@ function switchName(countryName) {
     : countryName === 'Bosnia'
     ? 'BiH'
     : countryName;
-}
-
-async function getDataFromAllBalkanCountries() {
-  try {
-    const covidApi = new NovelCovid();
-    return covidApi.countries(Object.values(balkanCountries).join(','));
-  } catch (error) {
-    console.error('An error has occurred', error);
-  }
 }
 
 export default startLogarithmicChart;

@@ -1,5 +1,4 @@
 import regeneratorRuntime from 'regenerator-runtime';
-import { NovelCovid } from 'novelcovid';
 import {
   ready,
   useTheme,
@@ -12,14 +11,14 @@ import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_dataviz from '@amcharts/amcharts4/themes/dataviz';
 import { balkanCountries } from './constants';
 import { tooltip } from './tooltip';
-import { renameCountryNames } from './utils';
+import { getCovidDataWithNamesRenamed } from './utils';
 
-const { MACEDONIA, BOSNIA } = balkanCountries;
+const { MACEDONIA } = balkanCountries;
 
 options.queue = true;
 
-function startRadarChart() {
-  ready(async function () {
+function startRadarChart(covidData) {
+  ready(function () {
     useTheme(am4themes_dataviz);
 
     let chart = create('radarChart', am4charts.RadarChart);
@@ -30,8 +29,8 @@ function startRadarChart() {
     chart.preloader.opacity = 0.6;
     chart.preloader.visible = true;
 
-    chart.data = renameCountryNames(
-      await getTransformedCountryData(),
+    chart.data = getCovidDataWithNamesRenamed(
+      getTransformedCountryData(covidData),
       MACEDONIA,
       'BiH',
     );
@@ -50,14 +49,17 @@ function startRadarChart() {
     categoryAxis.renderer.minGridDistance = 60;
     categoryAxis.renderer.inversed = true;
     categoryAxis.renderer.labels.template.location = 0.5;
+    categoryAxis.renderer.labels.template.fill = color("#F0FFFF");
 
     let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.min = 0;
     valueAxis.extraMax = 0.1;
     valueAxis.renderer.grid.template.strokeOpacity = 0.08;
+    valueAxis.renderer.labels.template.fill = color("#A0A0A0");
+    valueAxis.renderer.grid.template.stroke = color("#A0A0A0");
 
     chart.seriesContainer.zIndex = -10;
-
+    
     let series = chart.series.push(new am4charts.RadarColumnSeries());
     series.dataFields.categoryX = 'country';
     series.dataFields.valueO = 'countryFlag';
@@ -89,10 +91,10 @@ function startRadarChart() {
   });
 }
 
-async function getTransformedCountryData() {
+function getTransformedCountryData(covidData) {
   const countriesCovid = [];
   try {
-    for (const c of await getCountryData()) {
+    for (const c of covidData) {
       const {
         countryInfo,
         country,
@@ -121,22 +123,4 @@ async function getTransformedCountryData() {
   }
 }
 
-async function getCountryData() {
-  try {
-    const covidApi = new NovelCovid();
-    return covidApi.countries(Object.values(balkanCountries).join(','));
-  } catch (error) {
-    console.error('An error has occurred', error);
-    const element = document.getElementById('radarChart');
-    element.parentNode.removeChild(element);
-    const div = document.createElement('div');
-    div.innerHTML =
-      'Radar chart could now load due to error on fetching data from an API';
-
-    const container = document.getElementsByClassName('radarContainer');
-    container[0].appendChild(div);
-  }
-}
-
 export default startRadarChart;
-export { getCountryData, getTransformedCountryData };

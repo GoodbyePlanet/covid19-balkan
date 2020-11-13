@@ -1,17 +1,13 @@
 import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_dark from '@amcharts/amcharts4/themes/dark';
-import { NovelCovid } from 'novelcovid';
-import { balkanCountries } from './constants';
-import { renameCountryNames } from './utils';
-
-const covidApi = new NovelCovid();
+import { getCovidDataWithNamesRenamed } from './utils';
 
 am4core.options.queue = true;
 am4core.options.onlyShowOnViewport = true;
 
-function startColumnChart() {
-  am4core.ready(async function () {
+function startColumnChart(covidData) {
+  am4core.ready(function () {
     am4core.useTheme(am4themes_dark);
     am4core.options.autoSetClassName = true;
 
@@ -21,8 +17,8 @@ function startColumnChart() {
     chart.preloader.opacity = 0.6;
     chart.preloader.visible = true;
 
-    chart.data = renameCountryNames(
-      await getData(),
+    chart.data = getCovidDataWithNamesRenamed(
+      getData(covidData),
       'N. Macedonia',
       'BIH',
     ).reverse();
@@ -61,10 +57,10 @@ function startColumnChart() {
   });
 }
 
-async function getData() {
+function getData(covidData) {
   const countriesCovid = [];
   try {
-    for (const c of await getCountryData()) {
+    for (const c of covidData) {
       const { country, deaths, recovered } = c;
       countriesCovid.push({
         country,
@@ -76,22 +72,6 @@ async function getData() {
     return countriesCovid;
   } catch (error) {
     console.error('Error has occured ', error);
-  }
-}
-
-async function getCountryData() {
-  try {
-    return covidApi.countries(Object.values(balkanCountries).join(','));
-  } catch (error) {
-    console.error('An error has occurred', error);
-    const element = document.getElementById('columnChart');
-    element.parentNode.removeChild(element);
-    const div = document.createElement('div');
-    div.innerHTML =
-      'Column chart could now load due to error on fetching data from an API';
-
-    const container = document.getElementsByClassName('coulmnContainer');
-    container[0].appendChild(div);
   }
 }
 

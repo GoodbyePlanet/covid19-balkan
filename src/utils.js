@@ -1,4 +1,4 @@
-function renameCountryNames(covidData, macedoniaName, bosniaName) {
+function getCovidDataWithNamesRenamed(covidData, macedoniaName, bosniaName) {
   return covidData.map((item) => {
     if (item.country === 'Macedonia') {
       item.country = macedoniaName;
@@ -10,4 +10,4 @@ function renameCountryNames(covidData, macedoniaName, bosniaName) {
   });
 }
 
-export { renameCountryNames };
+export { getCovidDataWithNamesRenamed };
