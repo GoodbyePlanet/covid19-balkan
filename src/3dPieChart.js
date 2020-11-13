@@ -1,5 +1,4 @@
 import * as am4charts from '@amcharts/amcharts4/charts';
-import { NovelCovid } from 'novelcovid';
 import {
   ready,
   useTheme,
@@ -10,8 +9,6 @@ import {
 } from '@amcharts/amcharts4/core';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import { getCovidDataWithNamesRenamed } from './utils';
-
-const covidApi = new NovelCovid();
 
 const chartColors = [
   '#fa6e6e',
@@ -37,7 +34,7 @@ function start3dPieChart(covidData) {
     chart.preloader.fill = '#FFFFFF';
     chart.preloader.opacity = 0.6;
     chart.preloader.visible = true;
-    
+
     chart.data = getCovidDataWithNamesRenamed(
       getTestsCounductedForCountries(covidData),
       'N. Macedonia',

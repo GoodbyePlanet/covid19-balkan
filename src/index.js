@@ -2,7 +2,6 @@ import regeneratorRuntime from 'regenerator-runtime';
 import { NovelCovid } from 'novelcovid';
 import { CountUp } from 'countup.js';
 import { balkanCountries } from './constants';
-
 import startRadarChart from './radarChart';
 import startLogarithmicChart from './logarithmicChart';
 import particlesConfig from './particlesConfig';

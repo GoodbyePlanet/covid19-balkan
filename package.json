@@ -12,9 +12,11 @@
     "kill-all": "killall node && webpack-dev-server",
     "start:dev": "webpack-dev-server",
     "dev": "webpack -d",
+    "start": "npm run clean && npm run dev && npm run start:dev",
     "prod": "npm run clean && NODE_ENV=production webpack -p",
     "clean": "rimraf ./dist/* ",
-    "now-build": "webpack"
+    "now-build": "webpack",
+    "lint": "./node_modules/.bin/eslint src/"
   },
   "keywords": [],
   "author": "Nemanjas",
@@ -37,6 +39,10 @@
     "babel-loader": "^8.0.5",
     "babel-plugin-inline-json-import": "^0.3.2",
     "css-loader": "^3.5.0",
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "html-webpack-plugin": "^4.0.4",
     "jest": "^26.0.1",
     "prettier": "2.0.4",

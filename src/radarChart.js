@@ -49,17 +49,17 @@ function startRadarChart(covidData) {
     categoryAxis.renderer.minGridDistance = 60;
     categoryAxis.renderer.inversed = true;
     categoryAxis.renderer.labels.template.location = 0.5;
-    categoryAxis.renderer.labels.template.fill = color("#F0FFFF");
+    categoryAxis.renderer.labels.template.fill = color('#F0FFFF');
 
     let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
     valueAxis.min = 0;
     valueAxis.extraMax = 0.1;
     valueAxis.renderer.grid.template.strokeOpacity = 0.08;
-    valueAxis.renderer.labels.template.fill = color("#A0A0A0");
-    valueAxis.renderer.grid.template.stroke = color("#A0A0A0");
+    valueAxis.renderer.labels.template.fill = color('#A0A0A0');
+    valueAxis.renderer.grid.template.stroke = color('#A0A0A0');
 
     chart.seriesContainer.zIndex = -10;
-    
+
     let series = chart.series.push(new am4charts.RadarColumnSeries());
     series.dataFields.categoryX = 'country';
     series.dataFields.valueO = 'countryFlag';
