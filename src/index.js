@@ -7,6 +7,7 @@ import startLogarithmicChart from './logarithmicChart';
 import particlesConfig from './particlesConfig';
 import startColumnChart from './columnChart';
 import start3dPieChart from './3dPieChart';
+import { showErrorMessage } from './errorMessage';
 
 const covidApi = new NovelCovid();
 
@@ -15,107 +16,111 @@ async function getCountryData() {
     return covidApi.countries(Object.values(balkanCountries).join(','));
   } catch (error) {
     console.error('An error has occured', error);
+    showErrorMessage();
   }
 }
 
 window.onload = async function () {
   const covidData = await getCountryData();
 
-  startRadarChart(covidData);
-  startLogarithmicChart('cases', covidData);
-  startLogarithmicChart('deaths', covidData);
-  start3dPieChart(covidData);
-  startColumnChart(covidData);
+  if (!covidData) {
+    showErrorMessage();
+  } else {
+    startRadarChart(covidData);
+    startLogarithmicChart('cases', covidData);
+    startLogarithmicChart('deaths', covidData);
+    start3dPieChart(covidData);
+    startColumnChart(covidData);
 
-  try {
-    let infected = 0;
-    let recovered = 0;
-    let deaths = 0;
+    try {
+      let infected = 0;
+      let recovered = 0;
+      let deaths = 0;
 
-    for (const c of covidData) {
-      infected += c.cases;
-      recovered += c.recovered;
-      deaths += c.deaths;
+      for (const c of covidData) {
+        infected += c.cases;
+        recovered += c.recovered;
+        deaths += c.deaths;
+      }
+
+      const infectedCountUp = new CountUp('infectedCount', infected);
+      infectedCountUp.start();
+
+      const deathsCountUp = new CountUp('deathsCount', deaths);
+      deathsCountUp.start();
+
+      const recoveredCountUp = new CountUp('recoveredCount', recovered);
+      recoveredCountUp.start();
+    } catch (error) {
+      console.error('Error has occured', error);
     }
 
-    const infectedCountUp = new CountUp('infectedCount', infected);
-    infectedCountUp.start();
+    function swapInfoLinks(args) {
+      (this.items = document.querySelectorAll(args.selector)),
+        (this.duration = args.duration),
+        (this.tick = 0),
+        (this.index = 0),
+        this.last,
+        this.current;
 
-    const deathsCountUp = new CountUp('deathsCount', deaths);
-    deathsCountUp.start();
-
-    const recoveredCountUp = new CountUp('recoveredCount', recovered);
-    recoveredCountUp.start();
-  } catch (error) {
-    console.error('Error has occured', error);
-  }
-
-  function swapInfoLinks(args) {
-    (this.items = document.querySelectorAll(args.selector)),
-      (this.duration = args.duration),
-      (this.tick = 0),
-      (this.index = 0),
-      this.last,
-      this.current;
-
-    this.main();
-  }
-  swapInfoLinks.prototype.main = function () {
-    requestAnimationFrame(this.main.bind(this));
-    if (this.tick >= this.duration) {
-      this.tick = 0;
-      this.swap();
-      this.render();
-    } else {
-      this.tick++;
+      this.main();
     }
-  };
+    swapInfoLinks.prototype.main = function () {
+      requestAnimationFrame(this.main.bind(this));
+      if (this.tick >= this.duration) {
+        this.tick = 0;
+        this.swap();
+        this.render();
+      } else {
+        this.tick++;
+      }
+    };
 
-  swapInfoLinks.prototype.render = function () {
-    this.current.classList.remove('hidden');
-    this.last.classList.add('hidden');
-  };
+    swapInfoLinks.prototype.render = function () {
+      this.current.classList.remove('hidden');
+      this.last.classList.add('hidden');
+    };
 
-  swapInfoLinks.prototype.setCurrent = function (index, lastIndex) {
-    this.current = this.items[index];
-    this.last = this.items[lastIndex];
-  };
+    swapInfoLinks.prototype.setCurrent = function (index, lastIndex) {
+      this.current = this.items[index];
+      this.last = this.items[lastIndex];
+    };
 
-  swapInfoLinks.prototype.swap = function () {
-    let nextIndex = this.index + 1;
-    if (this.index == this.items.length - 1) {
-      this.index = 0;
-      this.setCurrent(0, this.items.length - 1);
-    } else {
-      this.setCurrent(nextIndex, nextIndex - 1);
-      this.index = nextIndex;
-    }
-  };
+    swapInfoLinks.prototype.swap = function () {
+      let nextIndex = this.index + 1;
+      if (this.index == this.items.length - 1) {
+        this.index = 0;
+        this.setCurrent(0, this.items.length - 1);
+      } else {
+        this.setCurrent(nextIndex, nextIndex - 1);
+        this.index = nextIndex;
+      }
+    };
 
-  new swapInfoLinks({
-    duration: 500,
-    selector: '.text',
-  });
+    new swapInfoLinks({
+      duration: 500,
+      selector: '.text',
+    });
 
-  particlesJS('particles-js', particlesConfig);
+    const modal = document.getElementById('modal-id');
 
-  const modal = document.getElementById('modal-id');
+    document.getElementById('open-modal-button').onclick = function () {
+      modal.style.display = 'block';
+    };
 
-  document.getElementById('open-modal-button').onclick = function () {
-    modal.style.display = 'block';
-  };
-
-  document.getElementsByClassName('close')[0].onclick = function () {
-    modal.style.display = 'none';
-  };
-
-  const data = covidData;
-  document.getElementById('last-updated').innerHTML =
-    'Data last updated ' + new Date(data[0].updated);
-
-  window.onclick = function (event) {
-    if (event.target == modal) {
+    document.getElementsByClassName('close')[0].onclick = function () {
       modal.style.display = 'none';
-    }
-  };
+    };
+
+    const data = covidData;
+    document.getElementById('last-updated').innerHTML =
+      'Data last updated ' + new Date(data[0].updated);
+
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    };
+  }
+  particlesJS('particles-js', particlesConfig);
 };

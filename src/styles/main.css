@@ -67,7 +67,7 @@ canvas {
   margin-right: 10px;
 }
 
-.container {
+.radarAndLogarithmicContainer {
   display: flex;
   margin-bottom: 30px;
 }
@@ -107,6 +107,12 @@ canvas {
   flex: 1;
   align-items: center;
   justify-content: center;
+}
+
+#errorMassage {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
 }
 
 #particles-js {
@@ -265,7 +271,7 @@ canvas {
 
 /* Media Queries */
 @media only screen and (max-width: 1100px) {
-  .container {
+  .radarAndLogarithmicContainer {
     display: flex;
     flex-direction: column;
   }

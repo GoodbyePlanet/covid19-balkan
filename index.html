@@ -48,239 +48,244 @@
       <h4>Data on current impact of Coronavirus in the Balkan countries</h4>
     </div>
 
+    <div id="errorMassage"></div>
+    
     <div class="container">
-      <div class="logarithmicContainer">
-        <div id="logarithmicChartcases"></div>
+
+      <div class="radarAndLogarithmicContainer">
+        <div class="logarithmicContainer">
+          <div id="logarithmicChartcases"></div>
+        </div>
+
+        <div class="radarContainer">
+          <div id="radarChart"></div>
+        </div>
       </div>
 
-      <div class="radarContainer">
-        <div id="radarChart"></div>
-      </div>
-    </div>
+      <div class="deathsAndTotalTestsContainer">
+        <div class="logarithmicContainer">
+          <div id="logarithmicChartdeaths"></div>
+        </div>
 
-    <div class="deathsAndTotalTestsContainer">
-      <div class="logarithmicContainer">
-        <div id="logarithmicChartdeaths"></div>
+        <div class="pieContainer">
+          <div id="pieChart"></div>
+        </div>
       </div>
 
-      <div class="pieContainer">
-        <div id="pieChart"></div>
-      </div>
-    </div>
-
-    <div class="columnChartAndTotalsContainer">
-      <div class="coulmnContainer">
-        <div id="columnChart"></div>
-      </div>
-      <div class="totalsContainer">
-        <div class="circlesContainer">
-         
-          <div class="totalsTitle">Total Counts on Balkan</div>
+      <div class="columnChartAndTotalsContainer">
+        <div class="coulmnContainer">
+          <div id="columnChart"></div>
+        </div>
+        <div class="totalsContainer">
+          <div class="circlesContainer">
           
-          <div class="circles">
-            <div class="recoveredCircle">
-              <div class="counters">
-                <div class="recoveredIconText"><i class="fas fa-heartbeat"></i> RECOVERED: </div>
-                <div id="recoveredCount"></div>
+            <div class="totalsTitle">Total Counts on Balkan</div>
+            
+            <div class="circles">
+              <div class="recoveredCircle">
+                <div class="counters">
+                  <div class="recoveredIconText"><i class="fas fa-heartbeat"></i> RECOVERED: </div>
+                  <div id="recoveredCount"></div>
+                </div>
+                <div class="circlesAnimation recovered" style="animation-delay: -3s"></div>
+                <div class="circlesAnimation recovered" style="animation-delay: -2s"></div>
+                <div class="circlesAnimation recovered" style="animation-delay: -1s"></div>
+                <div class="circlesAnimation recovered" style="animation-delay: 0s"></div>
               </div>
-              <div class="circlesAnimation recovered" style="animation-delay: -3s"></div>
-              <div class="circlesAnimation recovered" style="animation-delay: -2s"></div>
-              <div class="circlesAnimation recovered" style="animation-delay: -1s"></div>
-              <div class="circlesAnimation recovered" style="animation-delay: 0s"></div>
-            </div>
-            <div class="infectedCircle">
-              <div class="counters">
-                <div class="infectedIconText"><i class="fas fa-virus"></i> INFECTED: </div>
-                <div id="infectedCount"></div>
+              <div class="infectedCircle">
+                <div class="counters">
+                  <div class="infectedIconText"><i class="fas fa-virus"></i> INFECTED: </div>
+                  <div id="infectedCount"></div>
+                </div>
+                <div class="circlesAnimation infected" style="animation-delay: -3s"></div>
+                <div class="circlesAnimation infected" style="animation-delay: -2s"></div>
+                <div class="circlesAnimation infected" style="animation-delay: -1s"></div>
+                <div class="circlesAnimation infected" style="animation-delay: 0s"></div>
               </div>
-              <div class="circlesAnimation infected" style="animation-delay: -3s"></div>
-              <div class="circlesAnimation infected" style="animation-delay: -2s"></div>
-              <div class="circlesAnimation infected" style="animation-delay: -1s"></div>
-              <div class="circlesAnimation infected" style="animation-delay: 0s"></div>
-            </div>
-            <div class="deathsCircle">
-              <div class="counters">
-                <div class="deathsIconText"><i class="fas fa-skull-crossbones"></i> DEATHS: </div>
-                <div id="deathsCount"></div>
+              <div class="deathsCircle">
+                <div class="counters">
+                  <div class="deathsIconText"><i class="fas fa-skull-crossbones"></i> DEATHS: </div>
+                  <div id="deathsCount"></div>
+                </div>
+                <div class="circlesAnimation deaths" style="animation-delay: -3s"></div>
+                <div class="circlesAnimation deaths" style="animation-delay: -2s"></div>
+                <div class="circlesAnimation deaths" style="animation-delay: -1s"></div>
+                <div class="circlesAnimation deaths" style="animation-delay: 0s"></div>
               </div>
-              <div class="circlesAnimation deaths" style="animation-delay: -3s"></div>
-              <div class="circlesAnimation deaths" style="animation-delay: -2s"></div>
-              <div class="circlesAnimation deaths" style="animation-delay: -1s"></div>
-              <div class="circlesAnimation deaths" style="animation-delay: 0s"></div>
             </div>
           </div>
-        </div>
-        <div class="infoLinksContainer">
-          <div class="infoLinksHeader">More info from official and unofficial sources</div>
-          <div class="infoLinks">
-            <div class="text" data-index="1">
-              <div class="infoLink">
-                <a
-                href="https://covid19.rs/homepage-english/"
-                target="_blank"
-                ><i>Latest information about COVID-19 in the Republic of Serbia</i></a>
+          <div class="infoLinksContainer">
+            <div class="infoLinksHeader">More info from official and unofficial sources</div>
+            <div class="infoLinks">
+              <div class="text" data-index="1">
+                <div class="infoLink">
+                  <a
+                  href="https://covid19.rs/homepage-english/"
+                  target="_blank"
+                  ><i>Latest information about COVID-19 in the Republic of Serbia</i></a>
+                </div>
+                <div class="infoLink">
+                  <a
+                  href="https://eody.gov.gr/neos-koronaios-covid-19/"
+                  target="_blank"
+                  ><i>Greece official news on COVID-19</i></a>
+                </div>
+                <div class="infoLink">
+                  <a
+                  href="https://www.koronavirus.hr/"
+                  target="_blank"
+                  ><i>Croatia official Coronavirus info website</i></a>
+                </div>
               </div>
-              <div class="infoLink">
-                <a
-                href="https://eody.gov.gr/neos-koronaios-covid-19/"
-                target="_blank"
-                ><i>Greece official news on COVID-19</i></a>
+              <div class="text hidden" data-index="2">
+                <div class="infoLink">
+                  <a
+                  href="https://www.gov.si/en/topics/coronavirus-disease-covid-19/"
+                  target="_blank"
+                  ><i>Republic of Slovenia COVID-19 information</i></a>
+                </div>
+                <div class="infoLink">
+                  <a
+                  href="https://koronavirususrpskoj.com/"
+                  target="_blank"
+                  ><i>Republika Srpska COVID-19 information</i></a>
+                </div>
+                <div class="infoLink">
+                  <a
+                  href="http://www.fmoh.gov.ba/index.php/novosti-iz-ministarstva"
+                  target="_blank"
+                  ><i>Federation of Bosnia and Herzegovina COVID-19 Information</i></a>
+                </div>
+                <div class="infoLink">
+                  <a
+                  href="https://www.iph.mk/en/"
+                  target="_blank"
+                  ><i>Institute of public health of republic of North Macedonia</i></a>
+                </div>
               </div>
-              <div class="infoLink">
-                <a
-                href="https://www.koronavirus.hr/"
-                target="_blank"
-                ><i>Croatia official Coronavirus info website</i></a>
-              </div>
-            </div>
-            <div class="text hidden" data-index="2">
-              <div class="infoLink">
-                <a
-                href="https://www.gov.si/en/topics/coronavirus-disease-covid-19/"
-                target="_blank"
-                ><i>Republic of Slovenia COVID-19 information</i></a>
-              </div>
-              <div class="infoLink">
-                <a
-                href="https://koronavirususrpskoj.com/"
-                target="_blank"
-                ><i>Republika Srpska COVID-19 information</i></a>
-              </div>
-              <div class="infoLink">
-                <a
-                href="http://www.fmoh.gov.ba/index.php/novosti-iz-ministarstva"
-                target="_blank"
-                ><i>Federation of Bosnia and Herzegovina COVID-19 Information</i></a>
-              </div>
-              <div class="infoLink">
-                <a
-                href="https://www.iph.mk/en/"
-                target="_blank"
-                ><i>Institute of public health of republic of North Macedonia</i></a>
-              </div>
-            </div>
-            <div class="text hidden" data-index="3">
-              <div class="infoLink">
-                <a
-                href="http://www.mh.government.bg/bg/informaciya-za-grazhdani/informaciya-otnosno-noviya-koronavirus-2019-ncov/"
-                target="_blank"
-                ><i>Bulgaria COVID-19 information</i></a>
-              </div>
-              <div class="infoLink">
-                <a
-                href="https://coronavirus.al/"
-                target="_blank"
-                ><i>Albanian government information on COVID-19</i></a>
-              </div>
-              <div class="infoLink">
-                <a
-                href="https://www.ijzcg.me/"
-                target="_blank"
-                ><i>Montenegro public healt institute website</i></a>
+              <div class="text hidden" data-index="3">
+                <div class="infoLink">
+                  <a
+                  href="http://www.mh.government.bg/bg/informaciya-za-grazhdani/informaciya-otnosno-noviya-koronavirus-2019-ncov/"
+                  target="_blank"
+                  ><i>Bulgaria COVID-19 information</i></a>
+                </div>
+                <div class="infoLink">
+                  <a
+                  href="https://coronavirus.al/"
+                  target="_blank"
+                  ><i>Albanian government information on COVID-19</i></a>
+                </div>
+                <div class="infoLink">
+                  <a
+                  href="https://www.ijzcg.me/"
+                  target="_blank"
+                  ><i>Montenegro public healt institute website</i></a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="footer-container">
-      <div class="info-footer">
-        <div class="more-info">
-          <button id="open-modal-button">More Information</button>
+      <div class="footer-container">
+        <div class="info-footer">
+          <div class="more-info">
+            <button id="open-modal-button">More Information</button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- The Modal -->
-    <div id="modal-id" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>More information</h2>
-        <h5 id="last-updated"></h5>
-        <p>
-          This website was developed by
-          <a class="link-bold" href="https://github.com/GoodbyePlanet" target="_newtab">
-            <b><i>Nemanja Vasic</i></b></a
-          >
-          full-stack developer at
-          <a href="https://codecentric.ba/" target="_blank"
-            ><b><i>codecentric Bosnia.</i></b></a
-          >
-        </p>
-
-        <div class="support">
-          <p>If you want to support this website you can </p>
-          <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" 
-              data-slug="Nemanjas" data-color="#100102" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" 
-              data-outline-color="#ffffff" data-font-color="#ffffff" data-coffee-color="red" >
-          </script>
-        </div>
-
-        <p>
-          The purpose of this website is to provide a simple, chart visualized
-          data about the current impact of COVID-19 in the Balkan countries.
-        </p>
-
-        <p>
-          The data are coming from the
-          <a href="https://github.com/NovelCOVID/API" target="_blank"
-            ><b><i>NovelCOVID API</i></b></a
-          >
-          which utilizes reliable sources like
-          <a href="https://www.worldometers.info/coronavirus/" target="_blank"
-            ><b><i>Worldometer's</i></b></a
-          >
-          real-time updates about COVID-19 virus.
-        </p>
-
-        <p>
-          About logarithmic chart - Since infectious diseases don’t spread in an
-          even, linear fashion, the logarithmic chart proves to be the best and
-          most effective way of interpreting data and showing how the number of
-          cases is growing and declining over time. You can find more useful information about logarithmic charts and how they help explain the
-          spread of COVID-19
-          <a
-            href="https://www.weforum.org/agenda/2020/04/covid-19-spread-logarithmic-graph/"
-            target="_blank"
-            ><b><i>here.</i></b></a
-          >
+      <!-- The Modal -->
+      <div id="modal-id" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>More information</h2>
+          <h5 id="last-updated"></h5>
           <p>
-            Logarithmic chart implemented on this website shows data for the last
-            30 days and for the 5 countries with the most cases.
-          </p>
-        </p>
-
-        <p>
-          If you have any suggestions, questions or feedback, please
-          <a href="mailto:nemanjavasa@gmail.com" target="_blank"
-            ><b><i>contact me !</i></b></a
-          >
-        </p>
-        <div class="author">
-          <span>
-            <a href="https://github.com/GoodbyePlanet" target="_newtab">
-              <i id="icon" class="fab fa-github fa-2x"></i>
-            </a>
-          </span>
-          <span>
-            <a href="https://twitter.com/nemanjavasa" target="_newtab">
-              <i id="icon" class="fab fa-twitter fa-2x"></i>
-            </a>
-          </span>
-          <span>
-            <a
-              href="https://www.linkedin.com/in/nemanja-vasic-linked/"
-              target="_newtab"
+            This website was developed by
+            <a class="link-bold" href="https://github.com/GoodbyePlanet" target="_newtab">
+              <b><i>Nemanja Vasic</i></b></a
             >
-              <i id="icon" class="fab fa-linkedin fa-2x"></i>
-            </a>
-          </span>
-          <span>
-            <a href="https://www.facebook.com/nemanjavasa" target="_newtab">
-              <i id="icon" class="fab fa-facebook fa-2x"></i>
-            </a>
-          </span>
+            full-stack developer at
+            <a href="https://codecentric.ba/" target="_blank"
+              ><b><i>codecentric Bosnia.</i></b></a
+            >
+          </p>
+
+          <div class="support">
+            <p>If you want to support this website you can </p>
+            <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" 
+                data-slug="Nemanjas" data-color="#100102" data-emoji=""  data-font="Cookie" data-text="Buy me a coffee" 
+                data-outline-color="#ffffff" data-font-color="#ffffff" data-coffee-color="red" >
+            </script>
+          </div>
+
+          <p>
+            The purpose of this website is to provide a simple, chart visualized
+            data about the current impact of COVID-19 in the Balkan countries.
+          </p>
+
+          <p>
+            The data are coming from the
+            <a href="https://github.com/NovelCOVID/API" target="_blank"
+              ><b><i>NovelCOVID API</i></b></a
+            >
+            which utilizes reliable sources like
+            <a href="https://www.worldometers.info/coronavirus/" target="_blank"
+              ><b><i>Worldometer's</i></b></a
+            >
+            real-time updates about COVID-19 virus.
+          </p>
+
+          <p>
+            About logarithmic chart - Since infectious diseases don’t spread in an
+            even, linear fashion, the logarithmic chart proves to be the best and
+            most effective way of interpreting data and showing how the number of
+            cases is growing and declining over time. You can find more useful information about logarithmic charts and how they help explain the
+            spread of COVID-19
+            <a
+              href="https://www.weforum.org/agenda/2020/04/covid-19-spread-logarithmic-graph/"
+              target="_blank"
+              ><b><i>here.</i></b></a
+            >
+            <p>
+              Logarithmic chart implemented on this website shows data for the last
+              30 days and for the 5 countries with the most cases.
+            </p>
+          </p>
+
+          <p>
+            If you have any suggestions, questions or feedback, please
+            <a href="mailto:nemanjavasa@gmail.com" target="_blank"
+              ><b><i>contact me !</i></b></a
+            >
+          </p>
+          <div class="author">
+            <span>
+              <a href="https://github.com/GoodbyePlanet" target="_newtab">
+                <i id="icon" class="fab fa-github fa-2x"></i>
+              </a>
+            </span>
+            <span>
+              <a href="https://twitter.com/nemanjavasa" target="_newtab">
+                <i id="icon" class="fab fa-twitter fa-2x"></i>
+              </a>
+            </span>
+            <span>
+              <a
+                href="https://www.linkedin.com/in/nemanja-vasic-linked/"
+                target="_newtab"
+              >
+                <i id="icon" class="fab fa-linkedin fa-2x"></i>
+              </a>
+            </span>
+            <span>
+              <a href="https://www.facebook.com/nemanjavasa" target="_newtab">
+                <i id="icon" class="fab fa-facebook fa-2x"></i>
+              </a>
+            </span>
+          </div>
         </div>
       </div>
     </div>
