@@ -49,15 +49,6 @@ canvas {
   width: 100%;
 }
 
-.info-footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 10px;
-  position: absolute;
-}
-
 .support {
   display: flex;
 }

@@ -122,5 +122,8 @@
     height: 300px;
   }
 
+  .totalsContainer {
+    display: initial;
+  }
   
 }
