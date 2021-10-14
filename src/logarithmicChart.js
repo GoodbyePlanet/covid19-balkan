@@ -263,6 +263,7 @@ async function getHistoricalDataForCountry(dataType, country, fieldName) {
 async function getHistoryTimelineData(dataType, country) {
   try {
     const covidApi = new NovelCovid();
+		covidApi.baseURL = 'https://api.caw.sh';
     const historical = await covidApi.historical(null, country);
 
     if (dataType === 'deaths') {

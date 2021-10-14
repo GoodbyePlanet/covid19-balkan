@@ -11,6 +11,8 @@ import { showErrorMessage } from './errorMessage';
 
 const covidApi = new NovelCovid();
 
+covidApi.baseURL = 'https://api.caw.sh';
+
 async function getCountryData() {
   try {
     return covidApi.countries(Object.values(balkanCountries).join(','));
