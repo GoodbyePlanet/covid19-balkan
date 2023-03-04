@@ -1,5 +1,4 @@
 import regeneratorRuntime from 'regenerator-runtime';
-import { NovelCovid } from 'novelcovid';
 import {
   ready,
   useTheme,
@@ -262,9 +261,9 @@ async function getHistoricalDataForCountry(dataType, country, fieldName) {
 
 async function getHistoryTimelineData(dataType, country) {
   try {
-    const covidApi = new NovelCovid();
-		covidApi.baseURL = 'https://api.caw.sh';
-    const historical = await covidApi.historical(null, country);
+    const API_URL = "https://disease.sh/v3/covid-19/historical/";
+    const data = await fetch(`${API_URL}${country}?lastdays=30`);
+    const historical = await data.json();
 
     if (dataType === 'deaths') {
       return historical.timeline.deaths;

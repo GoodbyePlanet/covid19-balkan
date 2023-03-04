@@ -1,23 +1,19 @@
-import regeneratorRuntime from 'regenerator-runtime';
-import { NovelCovid } from 'novelcovid';
-import { CountUp } from 'countup.js';
-import { balkanCountries } from './constants';
-import startRadarChart from './radarChart';
+import { CountUp } from "countup.js";
+import { balkanCountries } from "./constants";
+import startRadarChart from "./radarChart";
 import startLogarithmicChart from './logarithmicChart';
-import particlesConfig from './particlesConfig';
-import startColumnChart from './columnChart';
-import start3dPieChart from './3dPieChart';
-import { showErrorMessage } from './errorMessage';
+import particlesConfig from "./particlesConfig";
+import startColumnChart from "./columnChart";
+import { showErrorMessage } from "./errorMessage";
 
-const covidApi = new NovelCovid();
-
-covidApi.baseURL = 'https://api.caw.sh';
+const API_URL = "https://disease.sh/v3/covid-19/countries/";
 
 async function getCountryData() {
   try {
-    return covidApi.countries(Object.values(balkanCountries).join(','));
+    const data = await fetch(`${API_URL}${Object.values(balkanCountries).join(',')}`)
+    return await data.json();
   } catch (error) {
-    console.error('An error has occured', error);
+    console.error('An error has occurred', error);
     showErrorMessage();
   }
 }
@@ -30,8 +26,6 @@ window.onload = async function () {
   } else {
     startRadarChart(covidData);
     startLogarithmicChart('cases', covidData);
-    startLogarithmicChart('deaths', covidData);
-    start3dPieChart(covidData);
     startColumnChart(covidData);
 
     try {
