@@ -22,7 +22,7 @@
   "author": "Nemanjas",
   "license": "MIT",
   "dependencies": {
-    "@amcharts/amcharts4": "^4.9.12",
+    "@amcharts/amcharts4": "^4.10.28",
     "@types/core-js": "^2.5.3",
     "core-js": "^3.6.4",
     "countup.js": "^2.0.4",
